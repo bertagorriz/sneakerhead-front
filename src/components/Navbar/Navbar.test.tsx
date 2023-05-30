@@ -19,11 +19,11 @@ describe("Given a Navbar component", () => {
 
       const addLink = screen.getByRole("link", { name: "add-sneaker" });
       const homeLink = screen.getByRole("link", { name: "home" });
-      const logoutLink = screen.getByRole("link", { name: "logout" });
+      const logoutButton = screen.getByRole("button", { name: "logout" });
 
       expect(addLink).toBeInTheDocument();
       expect(homeLink).toBeInTheDocument();
-      expect(logoutLink).toBeInTheDocument();
+      expect(logoutButton).toBeInTheDocument();
     });
   });
 });
