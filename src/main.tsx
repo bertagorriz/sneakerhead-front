@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import "@fontsource/montserrat";
 import { store } from "./store";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyle/GlobalStyle";
