@@ -13,7 +13,7 @@ const Layout = (): React.ReactElement => {
       <ContainerStyled>
         <Outlet />
       </ContainerStyled>
-      {location.pathname !== paths.login && <Navbar />}
+      {location.pathname === paths.login || <Navbar />}
     </>
   );
 };
