@@ -49,6 +49,7 @@ const GlobalStyle = createGlobalStyle`
   img {
     max-width: 100%;
   }
+
 `;
 
 export default GlobalStyle;
