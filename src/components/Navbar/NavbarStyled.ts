@@ -15,11 +15,12 @@ const NavbarStyled = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     min-width: 320px;
-    padding: 14px 24px;
+    padding: 8px 24px;
     border-top: 0.8px solid ${(props) => props.theme.color.text};
 
     &__icon {
-      height: 36px;
+      height: 48px;
+      width: 48px;
       background-color: ${(props) => props.theme.color.secondary};
     }
   }
