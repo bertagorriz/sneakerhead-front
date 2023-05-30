@@ -12,7 +12,7 @@ const Navbar = (): React.ReactElement => {
             to={paths.login}
             aria-label="add-sneaker"
           >
-            <img src="./img/add.svg" alt="add icon" />
+            <img src="/img/add.svg" alt="add icon" />
           </NavLink>
         </li>
         <li>
@@ -21,12 +21,12 @@ const Navbar = (): React.ReactElement => {
             to={paths.home}
             aria-label="home"
           >
-            <img src="./img/home.svg" alt="home icon" />
+            <img src="/img/home.svg" alt="home icon" />
           </NavLink>
         </li>
         <li>
           <button className="navbar-list__icon" aria-label="logout">
-            <img src="./img/logout.svg" alt="logout icon" />
+            <img src="/img/logout.svg" alt="logout icon" />
           </button>
         </li>
       </ul>
