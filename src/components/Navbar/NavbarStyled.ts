@@ -10,6 +10,11 @@ const NavbarStyled = styled.nav`
     display: flex;
   }
 
+  a {
+    width: 48px;
+    height: 48px;
+  }
+
   .navbar-list {
     display: flex;
     flex-direction: row;
@@ -20,9 +25,12 @@ const NavbarStyled = styled.nav`
 
     &__icon {
       height: 48px;
-      width: 48px;
       background-color: ${(props) => props.theme.color.secondary};
     }
+  }
+
+  .active {
+    border: 3px solid ${(props) => props.theme.color.text};
   }
 `;
 
