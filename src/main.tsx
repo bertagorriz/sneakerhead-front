@@ -4,7 +4,6 @@ import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { store } from "./store";
-import "./index.css";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyle/GlobalStyle";
 import appRouter from "./routers/appRouter";
