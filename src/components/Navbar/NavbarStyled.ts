@@ -7,7 +7,7 @@ const NavbarStyled = styled.nav`
   background-color: ${(props) => props.theme.color.secondary};
 
   li {
-    display: contents;
+    display: flex;
   }
 
   .navbar-list {
@@ -20,6 +20,7 @@ const NavbarStyled = styled.nav`
 
     &__icon {
       height: 36px;
+      background-color: ${(props) => props.theme.color.secondary};
     }
   }
 `;
