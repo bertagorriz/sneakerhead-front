@@ -18,12 +18,9 @@ export default defineConfig({
       exclude: [
         "**/types.ts",
         "**/*.d.ts",
-        "src/components/App/App.tsx",
         "src/styles/GlobalStyle/GlobalStyle.ts",
         "src/main.tsx",
         "src/store/index.ts",
-        "src/components/Layout/Layout.tsx",
-        "src/components/shared/ContainerStyled.ts",
         "src/routers/appRouter.tsx",
       ],
     },
