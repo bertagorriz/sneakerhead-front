@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     font: inherit;
     border: none;
+    padding: 0;
   }
 
   a {
