@@ -22,6 +22,7 @@ export default defineConfig({
         "src/main.tsx",
         "src/store/index.ts",
         "src/routers/appRouter.tsx",
+        "src/routers/LazyPages.tsx",
       ],
     },
   },
