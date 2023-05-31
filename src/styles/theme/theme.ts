@@ -8,7 +8,8 @@ const theme: DefaultTheme = {
     text: "#000",
     textDisable: "#666",
     goodFeedback: "#378a4e",
-    wrongFeedback: "#",
+    wrongFeedback: "#d65442",
+    none: "#fff",
   },
   fonts: {
     fontFamily: "Montserrat, sans-serif",
