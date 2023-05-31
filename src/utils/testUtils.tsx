@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { RootState, setupStore, store } from "../store";
-import theme from "../styles/theme";
+import theme from "../styles/theme/theme";
 import GlobalStyle from "../styles/GlobalStyle/GlobalStyle";
 
 export const renderWithProviders = (

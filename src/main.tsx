@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import "@fontsource/montserrat";
 import { store } from "./store";
-import theme from "./styles/theme";
+import theme from "./styles/theme/theme";
 import GlobalStyle from "./styles/GlobalStyle/GlobalStyle";
 import appRouter from "./routers/appRouter";
 
