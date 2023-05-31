@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
   ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
     margin: 0;
   }
 
@@ -44,12 +44,13 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+    padding: 0;
+    margin: 0;
   }
 
   img {
     max-width: 100%;
   }
-
 `;
 
 export default GlobalStyle;

@@ -5,32 +5,18 @@ const NavbarStyled = styled.nav`
   position: fixed;
   bottom: 0;
   background-color: ${(props) => props.theme.color.secondary};
-
-  li {
-    display: flex;
-  }
-
-  a {
-    width: 48px;
-    height: 48px;
-  }
+  border-top: 0.8px solid ${(props) => props.theme.color.text};
 
   .navbar-list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    min-width: 320px;
     padding: 8px 24px;
-    border-top: 0.8px solid ${(props) => props.theme.color.text};
-
-    &__icon {
-      height: 48px;
-      background-color: ${(props) => props.theme.color.secondary};
-    }
+    height: 100%;
   }
 
-  .active {
-    border: 3px solid ${(props) => props.theme.color.text};
+  .active > svg {
+    border: 2px solid ${(props) => props.theme.color.text};
   }
 `;
 
