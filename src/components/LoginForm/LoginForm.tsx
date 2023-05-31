@@ -2,7 +2,11 @@ import { useState } from "react";
 import { UserCredentials } from "../../store/user/types";
 import LoginFormStyled from "./LoginFormStyled";
 
-const LoginForm = (): React.ReactElement => {
+interface LoginFormProps {
+  handleOnSubmit: () => void;
+}
+
+const LoginForm = ({ handleOnSubmit }: LoginFormProps): React.ReactElement => {
   const initialUserCredentials: UserCredentials = {
     username: "",
     password: "",
@@ -19,11 +23,22 @@ const LoginForm = (): React.ReactElement => {
     });
   };
 
+  const actionOnClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    handleOnSubmit();
+    setUserCredentials(initialUserCredentials);
+  };
+
   const isReady =
     userCredentials.username !== "" && userCredentials.password !== "";
 
   return (
-    <LoginFormStyled className="form" autoComplete="off" noValidate>
+    <LoginFormStyled
+      className="form"
+      autoComplete="off"
+      onSubmit={actionOnClick}
+      noValidate
+    >
       <div>
         <label className="form__label" htmlFor="username">
           Username
