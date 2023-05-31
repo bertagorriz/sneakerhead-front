@@ -15,6 +15,11 @@ const LoginForm = (): React.ReactElement => {
         </label>
         <input className="form__input" type="password" id="password" />
       </div>
+      <div>
+        <button type="submit" className="form__button">
+          Login
+        </button>
+      </div>
     </LoginFormStyled>
   );
 };
