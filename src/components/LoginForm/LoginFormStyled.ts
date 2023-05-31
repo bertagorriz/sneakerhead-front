@@ -26,12 +26,17 @@ const LoginFormStyled = styled.form`
 
     &__button {
       padding: 19px;
+      margin-top: 20px;
       background-color: ${(props) => props.theme.color.primary};
       width: 100%;
       border-radius: 35px;
       border: 0.8px solid ${(props) => props.theme.color.text};
       text-transform: uppercase;
       font-weight: ${(props) => props.theme.fontSizes.weight700};
+      :disabled {
+        color: ${(props) => props.theme.color.text};
+        background-color: ${(props) => props.theme.color.none};
+      }
     }
   }
 `;

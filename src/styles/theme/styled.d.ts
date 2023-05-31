@@ -9,6 +9,7 @@ declare module "styled-components" {
       textDisable: string;
       goodFeedback: string;
       wrongFeedback: string;
+      none: string;
     };
     fonts: {
       fontFamily: string;
