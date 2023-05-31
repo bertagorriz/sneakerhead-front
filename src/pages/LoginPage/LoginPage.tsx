@@ -1,3 +1,4 @@
+import LoginForm from "../../components/LoginForm/LoginForm";
 import LoginPageStyled from "./LoginPageStyled";
 
 const LoginPage = (): React.ReactElement => {
@@ -6,6 +7,7 @@ const LoginPage = (): React.ReactElement => {
       <h1 className="title">
         Login to access <span>to sneakers world</span>
       </h1>
+      <LoginForm />
     </LoginPageStyled>
   );
 };
