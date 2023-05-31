@@ -11,10 +11,11 @@ const theme: DefaultTheme = {
     wrongFeedback: "#",
   },
   fonts: {
-    fontFamily: "Montserrat",
+    fontFamily: "Montserrat, sans-serif",
   },
   fontSizes: {
-    weight: "400",
+    weight400: "400",
+    weight700: "700",
   },
 };
 

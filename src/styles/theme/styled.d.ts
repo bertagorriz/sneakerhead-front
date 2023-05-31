@@ -14,7 +14,8 @@ declare module "styled-components" {
       fontFamily: string;
     };
     fontSizes: {
-      weight: string;
+      weight400: string;
+      weight700: string;
     };
   }
 }
