@@ -9,7 +9,7 @@ beforeEach(() => {
 describe("Given a useLocalStorage custom hook", () => {
   const key = "token";
 
-  describe("When the setToken is invoked with a key 'token' and a value 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MTMiLCJuYW1lIjoiQmVydGEifQ.f7t5YAJq_cMNN3OxSwNHitlXeI2eUHMPNqEjNNZXQLU'", () => {
+  describe("When the setToken function is invoked with a key 'token' and a value 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MTMiLCJuYW1lIjoiQmVydGEifQ.f7t5YAJq_cMNN3OxSwNHitlXeI2eUHMPNqEjNNZXQLU'", () => {
     test("Then it should save the token in the local storage", async () => {
       const value = tokenMock;
 
@@ -25,7 +25,7 @@ describe("Given a useLocalStorage custom hook", () => {
     });
   });
 
-  describe("When the getToken is invoked with the key 'token'", () => {
+  describe("When the getToken function is invoked with the key 'token'", () => {
     test("Then it should get the token value", () => {
       const value = tokenMock;
 
@@ -40,6 +40,22 @@ describe("Given a useLocalStorage custom hook", () => {
       getToken(key);
 
       expect(localStorage.getItem(key)).toBe(value);
+    });
+  });
+
+  describe("When the removeToken function is invoked with a valid key", () => {
+    test("Then it should remove the token", () => {
+      localStorage.removeItem(key);
+
+      const {
+        result: {
+          current: { removeToken },
+        },
+      } = renderHook(() => useLocalStorage());
+
+      removeToken(key);
+
+      expect(localStorage.removeItem(key)).toBe(undefined);
     });
   });
 });

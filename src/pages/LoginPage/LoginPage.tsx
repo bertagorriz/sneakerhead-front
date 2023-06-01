@@ -19,15 +19,17 @@ const LoginPage = (): React.ReactElement => {
   const onSubmit = async (userCredentials: UserCredentials) => {
     const token = await getUserToken(userCredentials);
 
-    if (token) {
-      const userData = getTokenData(token);
-
-      dispatch(loginUserActionCreator(userData));
-
-      setToken("token", token);
-
-      Navigate(paths.home, { replace: true });
+    if (!token) {
+      return;
     }
+
+    const userData = getTokenData(token);
+
+    dispatch(loginUserActionCreator(userData));
+
+    setToken("token", token);
+
+    Navigate(paths.home);
   };
 
   return (
