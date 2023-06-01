@@ -1,5 +1,5 @@
 import { userMock } from "../../mocks/userMock";
-import { UserStateStructure, UserTokenStructure } from "./types";
+import { UserStateStructure } from "./types";
 import { loginUserActionCreator, userReducer } from "./userSlice";
 
 describe("Given a loginUser reducer", () => {
@@ -12,10 +12,11 @@ describe("Given a loginUser reducer", () => {
         isLogged: true,
       };
 
-      const currentUserState: UserTokenStructure = {
+      const currentUserState: UserStateStructure = {
         id: "",
         name: "",
         token: "",
+        isLogged: false,
       };
 
       const newUserState = userReducer(
