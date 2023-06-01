@@ -1,6 +1,10 @@
 import { userMock } from "../../mocks/userMock";
 import { UserStateStructure } from "./types";
-import { loginUserActionCreator, userReducer } from "./userSlice";
+import {
+  loginUserActionCreator,
+  logoutUserActionCreator,
+  userReducer,
+} from "./userSlice";
 
 describe("Given a loginUser reducer", () => {
   describe("When it receives an empty current user state and a loginUser action with a new user data", () => {
@@ -25,6 +29,30 @@ describe("Given a loginUser reducer", () => {
       );
 
       expect(newUserState).toStrictEqual(expectedUserState);
+    });
+  });
+});
+
+describe("Given a logoutUser reducer", () => {
+  describe("When it receives the user data", () => {
+    test("Then it should return the same user with property isLogged false", () => {
+      const user = userMock;
+      const currentUserState: UserStateStructure = {
+        ...user,
+        isLogged: true,
+      };
+
+      const newUserLogoutState = userReducer(
+        currentUserState,
+        logoutUserActionCreator(currentUserState)
+      );
+
+      const expectedUserState: UserStateStructure = {
+        ...user,
+        isLogged: false,
+      };
+
+      expect(newUserLogoutState).toStrictEqual(expectedUserState);
     });
   });
 });
