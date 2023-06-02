@@ -24,7 +24,7 @@ describe("Given a useUser custom hook", () => {
   });
 
   describe("When the getUserToken function is invoked with valid username and wrong password", () => {
-    test("Then it should return the response's method status with a '401' status code", async () => {
+    test("Then it should return the response's method status with a '401' status code", () => {
       server.resetHandlers(...errorHandlers);
 
       const {
@@ -33,9 +33,7 @@ describe("Given a useUser custom hook", () => {
         },
       } = renderHook(() => useUser());
 
-      const getTokenFunction = async () => {
-        await getUserToken(user);
-      };
+      const getTokenFunction = getUserToken(user);
 
       expect(getTokenFunction).rejects.toThrowError();
     });
