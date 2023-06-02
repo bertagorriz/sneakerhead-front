@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import LoginForm from "./LoginForm";
+import { userCredentialsMock } from "../../mocks/userMock";
 
 describe("Given a LoginForm component", () => {
   const usernameLabel = "Username";
@@ -43,8 +44,8 @@ describe("Given a LoginForm component", () => {
       const usernameInput = screen.getByLabelText(usernameLabel);
       const passwordInput = screen.getByLabelText(passwordLabel);
 
-      await userEvent.type(usernameInput, "Berta");
-      await userEvent.type(passwordInput, "hola");
+      await userEvent.type(usernameInput, userCredentialsMock.username);
+      await userEvent.type(passwordInput, userCredentialsMock.password);
 
       const button = screen.getByRole("button", { name: buttonText });
 
@@ -61,8 +62,8 @@ describe("Given a LoginForm component", () => {
       const usernameInput = screen.getByLabelText(usernameLabel);
       const passwordInput = screen.getByLabelText(passwordLabel);
 
-      await userEvent.type(usernameInput, "Berta");
-      await userEvent.type(passwordInput, "hola");
+      await userEvent.type(usernameInput, userCredentialsMock.username);
+      await userEvent.type(passwordInput, userCredentialsMock.password);
 
       const button = screen.getByRole("button", { name: buttonText });
 
