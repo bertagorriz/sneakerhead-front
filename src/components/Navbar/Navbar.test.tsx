@@ -1,15 +1,19 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { RouteObject, RouterProvider, createMemoryRouter } from "react-router";
 import Navbar from "./Navbar";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
-import { RouteObject, RouterProvider, createMemoryRouter } from "react-router";
 import paths from "../../routers/paths/paths";
 import LoginPage from "../../pages/LoginPage/LoginPage";
+import { userLoggedMock } from "../../mocks/userMock";
+import { UserStateStructure } from "../../store/user/types";
 
 describe("Given a Navbar component", () => {
   describe("When it is rendered", () => {
     test("Then it should show the add links", () => {
-      renderWithProviders(wrapWithRouter(<Navbar />));
+      const mockUserState: UserStateStructure = userLoggedMock;
+
+      renderWithProviders(wrapWithRouter(<Navbar />), { user: mockUserState });
 
       const addLink = screen.getByRole("link", { name: "add-sneaker" });
 
