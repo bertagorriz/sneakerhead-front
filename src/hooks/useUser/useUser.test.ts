@@ -23,7 +23,7 @@ describe("Given a useUser custom hook", () => {
     });
   });
 
-  describe("When the getUserToken function is invoked with valid username and wrong password", () => {
+  describe("When the getUserToken function is invoked with invalid username and wrong password", () => {
     test("Then it should return the response's method status with a '401' status code", () => {
       server.resetHandlers(...errorHandlers);
 

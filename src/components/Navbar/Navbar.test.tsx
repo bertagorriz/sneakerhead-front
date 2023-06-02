@@ -1,10 +1,7 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { RouteObject, RouterProvider, createMemoryRouter } from "react-router";
 import Navbar from "./Navbar";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
-import paths from "../../routers/paths/paths";
-import LoginPage from "../../pages/LoginPage/LoginPage";
 import { userLoggedMock } from "../../mocks/userMock";
 import { UserStateStructure } from "../../store/user/types";
 
@@ -38,24 +35,15 @@ describe("Given a Navbar component", () => {
   });
 
   describe("When the user is logged and clicks on the logout button", () => {
-    test("Then it should redirect the user to the loginPage", async () => {
-      const routes: RouteObject[] = [
-        {
-          path: "/",
-          element: <Navbar />,
-          children: [{ path: "/login", element: <LoginPage /> }],
-        },
-      ];
+    test("Then it shouldn't show the logout button", async () => {
+      const mockUserState: UserStateStructure = userLoggedMock;
+      renderWithProviders(wrapWithRouter(<Navbar />), { user: mockUserState });
 
-      const router = createMemoryRouter(routes);
+      const logoutButton = screen.getByRole("button", { name: "logout" });
 
-      renderWithProviders(<RouterProvider router={router} />);
+      await userEvent.click(logoutButton);
 
-      const button = screen.getByLabelText("logout");
-
-      await userEvent.click(button);
-
-      expect(router.state.location.pathname).toBe(paths.login);
+      expect(logoutButton).not.toBeInTheDocument();
     });
   });
 });
