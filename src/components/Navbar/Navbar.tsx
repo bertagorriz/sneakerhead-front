@@ -8,7 +8,7 @@ import { logoutUserActionCreator } from "../../store/user/userSlice";
 const Navbar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { removeToken } = useLocalStorage();
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const userState = useAppSelector((store) => store.user);
 
   const logout = () => {
@@ -16,7 +16,7 @@ const Navbar = (): React.ReactElement => {
 
     removeToken("token");
 
-    Navigate(paths.login);
+    navigate(paths.login);
   };
 
   return (

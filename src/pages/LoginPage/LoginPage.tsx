@@ -14,7 +14,7 @@ const LoginPage = (): React.ReactElement => {
   const { getUserToken } = useUser();
   const { getTokenData } = useToken();
   const dispatch = useAppDispatch();
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (userCredentials: UserCredentials) => {
     const token = await getUserToken(userCredentials);
@@ -30,7 +30,7 @@ const LoginPage = (): React.ReactElement => {
 
     setToken("token", token);
 
-    Navigate(paths.home);
+    navigate(paths.home);
   };
 
   return (
