@@ -1,8 +1,24 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import NavbarStyled from "./NavbarStyled";
 import paths from "../../routers/paths/paths";
+import { useAppDispatch, useAppSelector } from "../../store";
+import useLocalStorage from "../../hooks/useLocalStorage/useLocalStorage";
+import { logoutUserActionCreator } from "../../store/user/userSlice";
 
 const Navbar = (): React.ReactElement => {
+  const dispatch = useAppDispatch();
+  const { removeToken } = useLocalStorage();
+  const Navigate = useNavigate();
+  const userState = useAppSelector((store) => store.user);
+
+  const logout = () => {
+    dispatch(logoutUserActionCreator(userState));
+
+    removeToken("token");
+
+    Navigate(paths.login);
+  };
+
   return (
     <NavbarStyled>
       <ul className="navbar-list">
@@ -63,7 +79,7 @@ const Navbar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <button aria-label="logout">
+          <button onClick={logout} aria-label="logout">
             <svg
               className="navbar-list__icon"
               width="48"

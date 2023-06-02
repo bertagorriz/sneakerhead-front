@@ -21,6 +21,9 @@ const routes: RouteObject[] = [
           </Suspense>
         ),
       },
+      {
+        path: paths.home,
+      },
     ],
   },
 ];
