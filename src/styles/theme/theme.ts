@@ -14,9 +14,13 @@ const theme: DefaultTheme = {
   fonts: {
     fontFamily: "Montserrat, sans-serif",
   },
-  fontSizes: {
+  fontWeight: {
     weight400: "400",
     weight700: "700",
+  },
+  fontSize: {
+    body: "1rem",
+    title: "1.5rem",
   },
 };
 

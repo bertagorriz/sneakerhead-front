@@ -32,7 +32,7 @@ const LoginFormStyled = styled.form`
       border-radius: 35px;
       border: 0.8px solid ${(props) => props.theme.color.text};
       text-transform: uppercase;
-      font-weight: ${(props) => props.theme.fontSizes.weight700};
+      font-weight: ${(props) => props.theme.fontWeight.weight700};
       :disabled {
         color: ${(props) => props.theme.color.text};
         background-color: ${(props) => props.theme.color.none};

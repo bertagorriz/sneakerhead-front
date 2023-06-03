@@ -1,8 +1,9 @@
 import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
+import { Suspense } from "react";
 import App from "../components/App/App";
 import paths from "./paths/paths";
-import { Suspense } from "react";
-import { LazyLoginPage } from "./lazyComponents";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import { LazyListPage } from "./lazyComponents";
 
 const routes: RouteObject[] = [
   {
@@ -15,14 +16,15 @@ const routes: RouteObject[] = [
       },
       {
         path: paths.login,
-        element: (
-          <Suspense>
-            <LazyLoginPage />
-          </Suspense>
-        ),
+        element: <LoginPage />,
       },
       {
         path: paths.home,
+        element: (
+          <Suspense>
+            <LazyListPage />
+          </Suspense>
+        ),
       },
     ],
   },
