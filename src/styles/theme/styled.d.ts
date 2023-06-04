@@ -21,6 +21,7 @@ declare module "styled-components" {
     fontSize: {
       body: string;
       title: string;
+      subtitle: string;
     };
   }
 }

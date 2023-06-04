@@ -9,11 +9,12 @@ describe("Given a SneakersList component", () => {
       const sneakersMock = {
         sneakers: getSneakersDataMock(1, { name: "990v5" }),
       };
-      const title = sneakersMock.sneakers[0].name;
 
       renderWithProviders(<SneakersList />, { senakersStore: sneakersMock });
 
-      const expectedTitle = screen.getByRole("heading", { name: title });
+      const expectedTitle = screen.getByRole("heading", {
+        name: sneakersMock.sneakers[0].name,
+      });
 
       expect(expectedTitle).toBeInTheDocument();
     });

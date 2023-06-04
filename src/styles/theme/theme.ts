@@ -21,6 +21,7 @@ const theme: DefaultTheme = {
   fontSize: {
     body: "1rem",
     title: "1.5rem",
+    subtitle: "1.125rem",
   },
 };
 
