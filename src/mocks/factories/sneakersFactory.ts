@@ -22,5 +22,7 @@ const sneakersFactory = Factory.define<SneakerStructure>(() => ({
   user: faker.database.mongodbObjectId().toString(),
 }));
 
-export const getSneakersDataMock = (howMany: number, data?: SneakerStructure) =>
-  sneakersFactory.buildList(howMany, data);
+export const getSneakersDataMock = (
+  howMany: number,
+  data?: Partial<SneakerStructure>
+) => sneakersFactory.buildList(howMany, data);
