@@ -9,7 +9,7 @@ const Navbar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { removeToken } = useLocalStorage();
   const navigate = useNavigate();
-  const userState = useAppSelector((store) => store.user);
+  const userState = useAppSelector((store) => store.userStore);
 
   const logout = () => {
     dispatch(logoutUserActionCreator(userState));

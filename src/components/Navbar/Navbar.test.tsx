@@ -10,7 +10,9 @@ describe("Given a Navbar component", () => {
     test("Then it should show the add links", () => {
       const mockUserState: UserStateStructure = userLoggedMock;
 
-      renderWithProviders(wrapWithRouter(<Navbar />), { user: mockUserState });
+      renderWithProviders(wrapWithRouter(<Navbar />), {
+        userStore: mockUserState,
+      });
 
       const addLink = screen.getByRole("link", { name: "add-sneaker" });
 
@@ -37,7 +39,9 @@ describe("Given a Navbar component", () => {
   describe("When the user is logged and clicks on the logout button", () => {
     test("Then it shouldn't show the logout button", async () => {
       const mockUserState: UserStateStructure = userLoggedMock;
-      renderWithProviders(wrapWithRouter(<Navbar />), { user: mockUserState });
+      renderWithProviders(wrapWithRouter(<Navbar />), {
+        userStore: mockUserState,
+      });
 
       const logoutButton = screen.getByRole("button", { name: "logout" });
 
