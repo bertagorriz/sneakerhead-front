@@ -1,3 +1,4 @@
+import SneakersList from "../../components/SneakersList/SneakersList";
 import { getSneakersDataMock } from "../../mocks/factories/sneakersFactory";
 import { useAppDispatch } from "../../store";
 import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
@@ -11,6 +12,7 @@ const ListPage = (): React.ReactElement => {
   return (
     <ListPageStyled>
       <h1 className="home-title">Home</h1>
+      <SneakersList />
     </ListPageStyled>
   );
 };
