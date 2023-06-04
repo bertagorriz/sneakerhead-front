@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../store";
+import SneakerCard from "../SneakerCard/SneakerCard";
 import SneakersListStyled from "./SneakersListStyled";
 
 const SneakersList = (): React.ReactElement => {
@@ -7,7 +8,7 @@ const SneakersList = (): React.ReactElement => {
     <SneakersListStyled>
       {sneakers.map((sneaker) => (
         <li className="sneaker" key={sneaker.id}>
-          <h2>{sneaker.name}</h2>
+          <SneakerCard sneaker={sneaker} />
         </li>
       ))}
     </SneakersListStyled>
