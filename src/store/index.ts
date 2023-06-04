@@ -3,9 +3,11 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { userReducer } from "./user/userSlice";
+import { sneakersReducer } from "./sneakers/sneakersSlice";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  userStore: userReducer,
+  senakersStore: sneakersReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
