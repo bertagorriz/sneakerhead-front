@@ -26,3 +26,6 @@ export const getSneakersDataMock = (
   howMany: number,
   data?: Partial<SneakerStructure>
 ) => sneakersFactory.buildList(howMany, data);
+
+export const getSneakerDataMock = (data?: Partial<SneakerStructure>) =>
+  sneakersFactory.build(data);
