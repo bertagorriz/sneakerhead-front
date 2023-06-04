@@ -4,6 +4,7 @@ import paths from "../../routers/paths/paths";
 import { useAppDispatch, useAppSelector } from "../../store";
 import useLocalStorage from "../../hooks/useLocalStorage/useLocalStorage";
 import { logoutUserActionCreator } from "../../store/user/userSlice";
+import Button from "../Button/Button";
 
 const Navbar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -79,7 +80,7 @@ const Navbar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <button onClick={logout} aria-label="logout">
+          <Button actionOnClick={logout} aria-label="logout">
             <svg
               className="navbar-list__icon"
               width="48"
@@ -102,7 +103,7 @@ const Navbar = (): React.ReactElement => {
                 fill="black"
               />
             </svg>
-          </button>
+          </Button>
         </li>
       </ul>
     </NavbarStyled>

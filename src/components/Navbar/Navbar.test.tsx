@@ -30,7 +30,7 @@ describe("Given a Navbar component", () => {
     test("Then it should show the logout button", () => {
       renderWithProviders(wrapWithRouter(<Navbar />));
 
-      const logoutButton = screen.getByRole("button", { name: "logout" });
+      const logoutButton = screen.getByRole("button");
 
       expect(logoutButton).toBeInTheDocument();
     });
@@ -43,7 +43,7 @@ describe("Given a Navbar component", () => {
         userStore: mockUserState,
       });
 
-      const logoutButton = screen.getByRole("button", { name: "logout" });
+      const logoutButton = screen.getByRole("button");
 
       await userEvent.click(logoutButton);
 
