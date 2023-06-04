@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UserCredentials } from "../../store/user/types";
 import LoginFormStyled from "./LoginFormStyled";
+import Button from "../Button/Button";
 
 interface LoginFormProps {
   handleOnSubmit: (userCredentials: UserCredentials) => void;
@@ -64,9 +65,12 @@ const LoginForm = ({ handleOnSubmit }: LoginFormProps): React.ReactElement => {
         />
       </div>
       <div>
-        <button type="submit" className="form__button" disabled={!isReady}>
-          Login
-        </button>
+        <Button
+          type="submit"
+          className="form__button"
+          disabled={!isReady}
+          text="Login"
+        />
       </div>
     </LoginFormStyled>
   );
