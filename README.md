@@ -1,4 +1,4 @@
-![Logo](https://berta-gorriz-final-project-front-2023.netlify.app/images/logo.svg)
+![Logo](https://berta-gorriz-final-project-front-2023.netlify.app/img/logo.svg)
 
 Welcome to **SNEAKERHEAD**, an application for sneaker enthusiasts!
 

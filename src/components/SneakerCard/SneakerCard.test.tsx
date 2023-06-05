@@ -43,8 +43,6 @@ describe("Given a SneakerCard component", () => {
         name: sneakerMock.image,
       });
 
-      screen.debug();
-
       expect(expectedImage).toBeInTheDocument();
     });
   });
