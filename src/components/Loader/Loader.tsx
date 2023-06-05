@@ -1,5 +1,11 @@
+import LoaderStyled from "./LoaderStyled";
+
 const Loader = (): React.ReactElement => {
-  return <span className="loader" aria-label="loader" />;
+  return (
+    <LoaderStyled>
+      <span className="loader" aria-label="loader" />{" "}
+    </LoaderStyled>
+  );
 };
 
 export default Loader;
