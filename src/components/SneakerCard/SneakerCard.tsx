@@ -17,8 +17,8 @@ const SneakerCard = ({
           src={image}
           loading="lazy"
           alt={`Model ${name} from ${brand}`}
-          width="272"
-          height="272"
+          width={272}
+          height={272}
         />
       </div>
       <div className="card__text">
