@@ -80,7 +80,7 @@ const Navbar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <Button actionOnClick={logout} aria-label="logout">
+          <Button actionOnClick={logout} ariaLabel="logout">
             <svg
               className="navbar-list__icon"
               width="48"

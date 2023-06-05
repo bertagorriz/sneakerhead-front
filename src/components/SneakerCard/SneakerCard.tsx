@@ -15,6 +15,7 @@ const SneakerCard = ({
         <img
           className="card__image"
           src={image}
+          loading="lazy"
           alt={`Model ${name} from ${brand}`}
           width="272"
           height="272"
@@ -24,7 +25,7 @@ const SneakerCard = ({
         <h2 className="card__text__name">{name}</h2>
         <span className="card__text__brand">{brand}</span>
       </div>
-      <Button className="button__delete" aria-label="delete">
+      <Button className="button__delete" ariaLabel="delete">
         <svg
           width="48"
           height="48"
@@ -47,7 +48,7 @@ const SneakerCard = ({
           />
         </svg>
       </Button>
-      <Button className="button__edit" aria-label="edit">
+      <Button className="button__edit" ariaLabel="edit">
         <svg
           width="48"
           height="48"
