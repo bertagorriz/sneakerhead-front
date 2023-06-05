@@ -4,10 +4,12 @@ import SneakerCardStyled from "./SneakerCardStyled";
 
 interface SneakerCardProps {
   sneaker: SneakerStructure;
+  isLazy: "lazy" | "eager";
 }
 
 const SneakerCard = ({
   sneaker: { image, name, brand },
+  isLazy,
 }: SneakerCardProps): React.ReactElement => {
   return (
     <SneakerCardStyled className="card">
@@ -15,7 +17,7 @@ const SneakerCard = ({
         <img
           className="card__image"
           src={image}
-          loading="lazy"
+          loading={isLazy}
           alt={`Model ${name} from ${brand}`}
           width={272}
           height={272}
