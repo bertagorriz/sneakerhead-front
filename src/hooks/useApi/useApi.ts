@@ -4,16 +4,23 @@ import {
   SneakerStructure,
   SneakersStateStructure,
 } from "../../store/sneakers/types";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import paths from "../../routers/paths/paths";
+import {
+  hideLoaderActionCreator,
+  showLoaderActionCreator,
+} from "../../store/ui/uiSlice";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const useApi = () => {
   const { token } = useAppSelector((state) => state.userStore);
+  const dispatch = useAppDispatch();
 
   const getSneakers = useCallback(async (): Promise<SneakerStructure[]> => {
     try {
+      dispatch(showLoaderActionCreator());
+
       const {
         data: { sneakers },
       } = await axios.get<SneakersStateStructure>(
@@ -22,11 +29,14 @@ const useApi = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+
+      dispatch(hideLoaderActionCreator());
+
       return sneakers;
     } catch {
       throw new Error("Sorry, sneakers couldn't be loaded");
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   return { getSneakers };
 };
