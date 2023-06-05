@@ -1,6 +1,9 @@
 import { useCallback } from "react";
 import axios from "axios";
-import { SneakersStateStructure } from "../../store/sneakers/types";
+import {
+  SneakerStructure,
+  SneakersStateStructure,
+} from "../../store/sneakers/types";
 import { useAppSelector } from "../../store";
 import paths from "../../routers/paths/paths";
 
@@ -9,9 +12,11 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const useApi = () => {
   const { token } = useAppSelector((state) => state.userStore);
 
-  const getSneakers = useCallback(async (): Promise<SneakersStateStructure> => {
+  const getSneakers = useCallback(async (): Promise<SneakerStructure[]> => {
     try {
-      const { data: sneakers } = await axios.get<SneakersStateStructure>(
+      const {
+        data: { sneakers },
+      } = await axios.get<SneakersStateStructure>(
         `${apiUrl}${paths.sneakers}`,
         {
           headers: { Authorization: `Bearer ${token}` },

@@ -1,13 +1,20 @@
+import { useEffect } from "react";
 import SneakersList from "../../components/SneakersList/SneakersList";
-import { getSneakersDataMock } from "../../mocks/factories/sneakersFactory";
+import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
 import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
 import ListPageStyled from "./ListPageStyled";
 
 const ListPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
+  const { getSneakers } = useApi();
 
-  dispatch(loadSneakersActionCreator(getSneakersDataMock(4)));
+  useEffect(() => {
+    (async () => {
+      const sneakers = await getSneakers();
+      dispatch(loadSneakersActionCreator(sneakers));
+    })();
+  }, [getSneakers, dispatch]);
 
   return (
     <ListPageStyled>
