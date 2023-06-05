@@ -7,7 +7,7 @@ import { UserStateStructure } from "../../store/user/types";
 
 describe("Given a Navbar component", () => {
   describe("When it is rendered", () => {
-    test("Then it should show the add links", () => {
+    test("Then it should show the add link", () => {
       const mockUserState: UserStateStructure = userLoggedMock;
 
       renderWithProviders(wrapWithRouter(<Navbar />), {
