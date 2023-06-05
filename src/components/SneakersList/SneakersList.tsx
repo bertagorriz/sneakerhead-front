@@ -6,9 +6,12 @@ const SneakersList = (): React.ReactElement => {
   const { sneakers } = useAppSelector((store) => store.senakersStore);
   return (
     <SneakersListStyled>
-      {sneakers.map((sneaker) => (
+      {sneakers.map((sneaker, index) => (
         <li className="sneaker" key={sneaker.id}>
-          <SneakerCard sneaker={sneaker} />
+          <SneakerCard
+            sneaker={sneaker}
+            isLazy={index === 0 ? "eager" : "lazy"}
+          />
         </li>
       ))}
     </SneakersListStyled>
