@@ -5,6 +5,11 @@ import { UserCredentials } from "../../store/user/types";
 import useUser from "./useUser";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
+import { wrapWithProviders } from "../../utils/testUtils";
+
+beforeAll(() => {
+  server.resetHandlers();
+});
 
 describe("Given a useUser custom hook", () => {
   const user: UserCredentials = userCredentialsMock;
@@ -15,7 +20,7 @@ describe("Given a useUser custom hook", () => {
         result: {
           current: { getUserToken },
         },
-      } = renderHook(() => useUser());
+      } = renderHook(() => useUser(), { wrapper: wrapWithProviders });
 
       const token = await getUserToken(user);
 
@@ -31,7 +36,7 @@ describe("Given a useUser custom hook", () => {
         result: {
           current: { getUserToken },
         },
-      } = renderHook(() => useUser());
+      } = renderHook(() => useUser(), { wrapper: wrapWithProviders });
 
       const getTokenFunction = getUserToken(user);
 
