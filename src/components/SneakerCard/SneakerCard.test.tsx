@@ -14,7 +14,7 @@ describe("Given a SneakerCard component", () => {
   describe("When it is rendered", () => {
     test("Then it should show a heading with '990v5' text", () => {
       renderWithProviders(
-        wrapWithRouter(<SneakerCard sneaker={sneakerMock} />)
+        wrapWithRouter(<SneakerCard sneaker={sneakerMock} isLazy={"eager"} />)
       );
 
       const expectedTitle = screen.getByRole("heading", {
@@ -26,7 +26,7 @@ describe("Given a SneakerCard component", () => {
 
     test("Then it should show a span with 'New Balance' brand", () => {
       renderWithProviders(
-        wrapWithRouter(<SneakerCard sneaker={sneakerMock} />)
+        wrapWithRouter(<SneakerCard sneaker={sneakerMock} isLazy={"lazy"} />)
       );
 
       const expectedSpan = screen.getByText(sneakerMock.brand);
@@ -36,7 +36,7 @@ describe("Given a SneakerCard component", () => {
 
     test("Then it should show a 990v5 NewBalance image", () => {
       renderWithProviders(
-        wrapWithRouter(<SneakerCard sneaker={sneakerMock} />)
+        wrapWithRouter(<SneakerCard sneaker={sneakerMock} isLazy={"lazy"} />)
       );
 
       const expectedImage = screen.getByRole("img", {
