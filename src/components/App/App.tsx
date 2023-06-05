@@ -14,16 +14,18 @@ const App = (): React.ReactElement => {
   useEffect(() => {
     const token = getToken("token");
 
-    if (token) {
-      const userData = getTokenData(token);
-
-      const tokenData: UserTokenStructure = {
-        ...userData,
-        token,
-      };
-
-      dispatch(loginUserActionCreator(tokenData));
+    if (!token) {
+      return;
     }
+
+    const userData = getTokenData(token);
+
+    const tokenData: UserTokenStructure = {
+      ...userData,
+      token,
+    };
+
+    dispatch(loginUserActionCreator(tokenData));
   }, [getToken, getTokenData, dispatch]);
 
   return <Layout />;
