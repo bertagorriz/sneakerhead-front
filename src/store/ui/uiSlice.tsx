@@ -13,8 +13,15 @@ const uiSlice = createSlice({
       ...currentState,
       isLoading: true,
     }),
+    hideLoader: (currentState: UiStateStructure) => ({
+      ...currentState,
+      isLoading: false,
+    }),
   },
 });
 
-export const { showLoader: showLoaderActionCreator } = uiSlice.actions;
+export const {
+  showLoader: showLoaderActionCreator,
+  hideLoader: hideLoaderActionCreator,
+} = uiSlice.actions;
 export const uiReducer = uiSlice.reducer;
