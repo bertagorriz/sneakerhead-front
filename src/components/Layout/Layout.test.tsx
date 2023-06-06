@@ -3,6 +3,12 @@ import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import Layout from "./Layout";
 import { UiStateStructure } from "../../store/ui/types";
 
+export const storeMock = {
+  isLoading: false,
+  isError: false,
+  message: "",
+};
+
 describe("Given a Layout component", () => {
   describe("When it is rendered", () => {
     test("Then it should show a header with 'Sneakerhead' logo", () => {
@@ -16,7 +22,10 @@ describe("Given a Layout component", () => {
     });
 
     test("Then it should show a loader if isLoading is set to true", () => {
-      const trueLoadingState: UiStateStructure = { isLoading: true };
+      const trueLoadingState: UiStateStructure = {
+        ...storeMock,
+        isLoading: true,
+      };
       const expectedAltText = "loader";
 
       renderWithProviders(wrapWithRouter(<Layout />), {

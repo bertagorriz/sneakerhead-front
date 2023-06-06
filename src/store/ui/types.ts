@@ -9,6 +9,6 @@ export interface UiLoaderStateStructure {
 }
 
 export interface UiFeedbackStateStructure {
-  isError: false;
+  isError: boolean;
   message: string;
 }
