@@ -26,13 +26,13 @@ describe("Given a Layout component", () => {
         ...storeMock,
         isLoading: true,
       };
-      const expectedAltText = "loader";
+      const expectedTitle = "loader";
 
       renderWithProviders(wrapWithRouter(<Layout />), {
         uiStore: trueLoadingState,
       });
 
-      const loader = screen.getByRole("generic", { name: expectedAltText });
+      const loader = screen.getByTitle(expectedTitle);
 
       expect(loader).toBeInTheDocument();
     });

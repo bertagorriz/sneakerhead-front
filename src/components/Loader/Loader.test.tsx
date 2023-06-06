@@ -5,11 +5,11 @@ import Loader from "./Loader";
 describe("Given a Loader component", () => {
   describe("When it is rendered", () => {
     test("Then it should show a loader", () => {
-      const expectedAltText = "loader";
+      const expectedTitle = "loader";
 
       renderWithProviders(wrapWithRouter(<Loader />));
 
-      const loader = screen.getByRole("generic", { name: expectedAltText });
+      const loader = screen.getByTitle(expectedTitle);
 
       expect(loader).toBeInTheDocument();
     });

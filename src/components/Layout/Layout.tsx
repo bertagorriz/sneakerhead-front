@@ -13,8 +13,8 @@ const Layout = (): React.ReactElement => {
 
   return (
     <LayoutStyled>
-      <Header />
       {isLoading && <Loader />}
+      <Header />
       <ContainerStyled>
         <Outlet />
       </ContainerStyled>
