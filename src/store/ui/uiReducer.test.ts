@@ -1,6 +1,7 @@
 import { storeMock } from "../../components/Layout/Layout.test";
 import { UiFeedbackStateStructure, UiStateStructure } from "./types";
 import {
+  hideFeedbackActionCreator,
   hideLoaderActionCreator,
   showFeedbackActionCreator,
   showLoaderActionCreator,
@@ -56,6 +57,35 @@ describe("Given a showFeedback reducer", () => {
         message: feedback.message,
       };
       const newFeedbackState = uiReducer(currentFeedbackState, action);
+
+      expect(newFeedbackState).toStrictEqual(expectedFeedbackState);
+    });
+  });
+});
+
+describe("Given a hideFeedback reducer", () => {
+  describe("When it receives a current state set to true and a hideFeedback action with a new state", () => {
+    test("Then it should return a new current state set to false", () => {
+      const currentFeedbackState: UiStateStructure = {
+        isLoading: false,
+        isError: true,
+        message: "Logout successful!We hope to see you soon...",
+      };
+      const message = "";
+      const feedback: UiStateStructure = {
+        ...currentFeedbackState,
+        isError: false,
+        message: message,
+      };
+
+      const action = hideFeedbackActionCreator();
+
+      const expectedFeedbackState: UiFeedbackStateStructure = {
+        ...currentFeedbackState,
+        isError: feedback.isError,
+        message: feedback.message,
+      };
+      const newFeedbackState = uiReducer(feedback, action);
 
       expect(newFeedbackState).toStrictEqual(expectedFeedbackState);
     });
