@@ -4,7 +4,6 @@ const ListPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 100%;
   min-width: 272px;
 
   .home-title {
