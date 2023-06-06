@@ -1,12 +1,15 @@
 import Button from "../Button/Button";
 import ModalStyled from "./ModalStyled";
 
-const Modal = (): React.ReactElement => {
-  const isError = false;
+interface ModalProps {
+  isError: boolean;
+}
+
+const Modal = ({ isError }: ModalProps): React.ReactElement => {
   return (
     <ModalStyled>
       <div className={`modal modal${isError ? "--wrong" : "--correct"}`}>
-        <Button className="modal__close">
+        <Button className="modal__close" ariaLabel="close">
           <svg
             width="30"
             height="31"
