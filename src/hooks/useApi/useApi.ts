@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import paths from "../../routers/paths/paths";
 import {
   hideLoaderActionCreator,
+  showFeedbackActionCreator,
   showLoaderActionCreator,
 } from "../../store/ui/uiSlice";
 
@@ -17,7 +18,9 @@ const useApi = () => {
   const { token } = useAppSelector((state) => state.userStore);
   const dispatch = useAppDispatch();
 
-  const getSneakers = useCallback(async (): Promise<SneakerStructure[]> => {
+  const getSneakers = useCallback(async (): Promise<
+    SneakerStructure[] | undefined
+  > => {
     try {
       dispatch(showLoaderActionCreator());
 
@@ -34,7 +37,10 @@ const useApi = () => {
 
       return sneakers;
     } catch {
-      throw new Error("Sorry, sneakers couldn't be loaded");
+      const error = "Sorry, sneakers couldn't be loaded";
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
+      throw error;
     }
   }, [dispatch, token]);
 

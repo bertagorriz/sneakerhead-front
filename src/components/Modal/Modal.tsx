@@ -1,15 +1,24 @@
+import { useAppDispatch, useAppSelector } from "../../store";
+import { hideFeedbackActionCreator } from "../../store/ui/uiSlice";
 import Button from "../Button/Button";
 import ModalStyled from "./ModalStyled";
 
-interface ModalProps {
-  isError: boolean;
-}
+const Modal = (): React.ReactElement => {
+  const { isError, message } = useAppSelector((state) => state.uiStore);
+  const dispatch = useAppDispatch();
 
-const Modal = ({ isError }: ModalProps): React.ReactElement => {
+  const onClose = () => {
+    dispatch(hideFeedbackActionCreator());
+  };
+
   return (
     <ModalStyled>
       <div className={`modal modal${isError ? "--wrong" : "--correct"}`}>
-        <Button className="modal__close" ariaLabel="close">
+        <Button
+          className="modal__close"
+          ariaLabel="close"
+          actionOnClick={onClose}
+        >
           <svg
             width="30"
             height="31"
@@ -23,8 +32,8 @@ const Modal = ({ isError }: ModalProps): React.ReactElement => {
             />
           </svg>
         </Button>
-        <span className="modal__text">
-          Logout successful!We hope to see you soon...
+        <span className="modal__text" title="modal">
+          {message}
         </span>
       </div>
     </ModalStyled>

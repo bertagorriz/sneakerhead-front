@@ -5,13 +5,16 @@ import Header from "../Header/Header";
 import paths from "../../routers/paths/paths";
 import { useAppSelector } from "../../store";
 import Loader from "../Loader/Loader";
+import Modal from "../Modal/Modal";
 
 const Layout = (): React.ReactElement => {
   const location = useLocation();
   const { isLoading } = useAppSelector((store) => store.uiStore);
+  const { message } = useAppSelector((store) => store.uiStore);
 
   return (
     <>
+      {message && <Modal />}
       {isLoading && <Loader />}
       <Header />
       <ContainerStyled>

@@ -17,7 +17,7 @@ const ModalStyled = styled.div`
     position: relative;
     padding: 1rem;
     width: 272px;
-    height: 144px;
+    height: 170px;
 
     &__close {
       background-color: transparent;

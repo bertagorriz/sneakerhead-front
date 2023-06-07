@@ -1,11 +1,13 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook, screen } from "@testing-library/react";
 import { tokenMock } from "../../mocks/tokenMock";
 import { userCredentialsMock } from "../../mocks/userMock";
 import { UserCredentials } from "../../store/user/types";
 import useUser from "./useUser";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
-import { wrapWithProviders } from "../../utils/testUtils";
+import { renderWithProviders, wrapWithProviders } from "../../utils/testUtils";
+import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import App from "../../components/App/App";
 
 beforeAll(() => {
   server.resetHandlers();
@@ -29,7 +31,7 @@ describe("Given a useUser custom hook", () => {
   });
 
   describe("When the getUserToken function is invoked with invalid username and wrong password", () => {
-    test("Then it should return the response's method status with a '401' status code", () => {
+    test("Then it should show a modal with a 'close' button", async () => {
       server.resetHandlers(...errorHandlers);
 
       const {
@@ -38,9 +40,22 @@ describe("Given a useUser custom hook", () => {
         },
       } = renderHook(() => useUser(), { wrapper: wrapWithProviders });
 
-      const getTokenFunction = getUserToken(user);
+      const routes = [
+        {
+          path: "/",
+          element: <App />,
+        },
+      ];
 
-      expect(getTokenFunction).rejects.toThrowError();
+      const router = createMemoryRouter(routes);
+
+      renderWithProviders(<RouterProvider router={router} />);
+
+      await getUserToken(userCredentialsMock);
+
+      const button = await screen.getByRole("button", { name: "close" });
+
+      expect(button).toBeInTheDocument();
     });
   });
 });

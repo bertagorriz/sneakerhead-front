@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import useLocalStorage from "../../hooks/useLocalStorage/useLocalStorage";
 import { logoutUserActionCreator } from "../../store/user/userSlice";
 import Button from "../Button/Button";
+import { showFeedbackActionCreator } from "../../store/ui/uiSlice";
 
 const Navbar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,13 @@ const Navbar = (): React.ReactElement => {
     removeToken("token");
 
     navigate(paths.login);
+
+    dispatch(
+      showFeedbackActionCreator({
+        isError: false,
+        message: "Logout successful! We hope to see you soon...",
+      })
+    );
   };
 
   return (

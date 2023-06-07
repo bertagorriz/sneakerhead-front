@@ -36,5 +36,22 @@ describe("Given a Layout component", () => {
 
       expect(loader).toBeInTheDocument();
     });
+
+    test("Then it should show a modal if isError is set to true and there is a message", () => {
+      const errorState: UiStateStructure = {
+        ...storeMock,
+        isError: true,
+        message: "Error",
+      };
+      const expectedTitle = "modal";
+
+      renderWithProviders(wrapWithRouter(<Layout />), {
+        uiStore: errorState,
+      });
+
+      const modal = screen.getByTitle(expectedTitle);
+
+      expect(modal).toBeInTheDocument();
+    });
   });
 });
