@@ -16,7 +16,8 @@ declare module "styled-components" {
     };
     fontWeight: {
       weight400: string;
-      weight700: string;
+      weight600: string;
+      weight800: string;
     };
     fontSize: {
       body: string;

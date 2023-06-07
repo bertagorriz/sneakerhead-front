@@ -12,6 +12,7 @@ const LoginPageStyled = styled.div`
     flex-direction: column;
     gap: 2px;
     font-size: 1rem;
+    font-weight: ${(props) => props.theme.fontWeight.weight400};
   }
 `;
 
