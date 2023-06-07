@@ -16,7 +16,8 @@ const theme: DefaultTheme = {
   },
   fontWeight: {
     weight400: "400",
-    weight700: "700",
+    weight600: "600",
+    weight800: "800",
   },
   fontSize: {
     body: "1rem",

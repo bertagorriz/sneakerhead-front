@@ -20,6 +20,7 @@ const SneakerCardStyled = styled.article`
 
       &__name {
         font-size: ${(props) => props.theme.fontSize.title};
+        font-weight: ${(props) => props.theme.fontWeight.weight600};
       }
 
       &__brand {

@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body,
+  p,
   h1,
   h2,
   h3,
