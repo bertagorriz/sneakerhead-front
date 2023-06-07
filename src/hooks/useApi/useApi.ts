@@ -18,9 +18,7 @@ const useApi = () => {
   const { token } = useAppSelector((state) => state.userStore);
   const dispatch = useAppDispatch();
 
-  const getSneakers = useCallback(async (): Promise<
-    SneakerStructure[] | undefined
-  > => {
+  const getSneakers = useCallback(async (): Promise<SneakerStructure[]> => {
     try {
       dispatch(showLoaderActionCreator());
 
