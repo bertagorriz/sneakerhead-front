@@ -3,6 +3,7 @@ import { UserCredentials } from "../../store/user/types";
 import { useAppDispatch } from "../../store";
 import {
   hideLoaderActionCreator,
+  showFeedbackActionCreator,
   showLoaderActionCreator,
 } from "../../store/ui/uiSlice";
 
@@ -13,7 +14,7 @@ const useUser = () => {
 
   const getUserToken = async (
     userCredentials: UserCredentials
-  ): Promise<string> => {
+  ): Promise<string | undefined> => {
     try {
       dispatch(showLoaderActionCreator());
 
@@ -21,11 +22,16 @@ const useUser = () => {
         data: { token },
       } = await axios.post(`${apiUrl}/user/login`, userCredentials);
 
-      dispatch(hideLoaderActionCreator());
-
       return token;
     } catch {
-      throw new Error("Wrong credentials");
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          message: "Wrong credentials, please try again",
+        })
+      );
     }
   };
 
