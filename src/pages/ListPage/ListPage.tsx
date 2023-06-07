@@ -12,7 +12,10 @@ const ListPage = (): React.ReactElement => {
   useEffect(() => {
     (async () => {
       const sneakers = await getSneakers();
-      dispatch(loadSneakersActionCreator(sneakers));
+
+      if (sneakers) {
+        dispatch(loadSneakersActionCreator(sneakers));
+      }
     })();
   }, [getSneakers, dispatch]);
 

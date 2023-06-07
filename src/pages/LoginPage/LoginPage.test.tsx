@@ -1,10 +1,18 @@
-import { screen } from "@testing-library/react";
+import { renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RouteObject, RouterProvider, createMemoryRouter } from "react-router";
-import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
+import {
+  renderWithProviders,
+  wrapWithProviders,
+  wrapWithRouter,
+} from "../../utils/testUtils";
 import LoginPage from "./LoginPage";
 import paths from "../../routers/paths/paths";
 import { userCredentialsMock } from "../../mocks/userMock";
+import { server } from "../../mocks/server";
+import { errorHandlers } from "../../mocks/handlers";
+import useUser from "../../hooks/useUser/useUser";
+import App from "../../components/App/App";
 
 describe("Given a LoginPage", () => {
   const expectedText = "Login to access to sneakers world";
@@ -23,7 +31,7 @@ describe("Given a LoginPage", () => {
     });
   });
 
-  describe("When it is rendered with user valid credentials and clicks on the button 'Login'", () => {
+  describe("When it is rendered with valid user credentials and clicks on the button 'Login'", () => {
     test("Then it should redirects to home page", async () => {
       const routes: RouteObject[] = [
         { path: "/", element: <LoginPage /> },
@@ -43,6 +51,35 @@ describe("Given a LoginPage", () => {
       await userEvent.click(button);
 
       expect(router.state.location.pathname).toBe(paths.home);
+    });
+  });
+
+  describe("When it is rendered with invalid username credentials", () => {
+    test("Then it should show a modal with a 'close' button", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const {
+        result: {
+          current: { getUserToken },
+        },
+      } = renderHook(() => useUser(), { wrapper: wrapWithProviders });
+
+      const routes = [
+        {
+          path: "/",
+          element: <App />,
+        },
+      ];
+
+      const router = createMemoryRouter(routes);
+
+      renderWithProviders(<RouterProvider router={router} />);
+
+      await getUserToken(userCredentialsMock);
+
+      const button = await screen.getByRole("button", { name: "close" });
+
+      expect(button).toBeInTheDocument();
     });
   });
 });
