@@ -13,6 +13,16 @@ export const handlers = [
   rest.get(`${apiUrl}${paths.sneakers}`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ sneakers: sneakerMock }));
   }),
+
+  rest.delete(
+    `${apiUrl}${paths.sneakers}${paths.delete}/:id`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({ message: "Sneaker removed successfully" })
+      );
+    }
+  ),
 ];
 
 export const errorHandlers = [
@@ -23,4 +33,11 @@ export const errorHandlers = [
   rest.get(`${apiUrl}${paths.sneakers}`, (_req, res, ctx) => {
     return res(ctx.status(401));
   }),
+
+  rest.delete(
+    `${apiUrl}${paths.sneakers}${paths.delete}/:id`,
+    (_req, res, ctx) => {
+      return res(ctx.status(404));
+    }
+  ),
 ];

@@ -1,8 +1,10 @@
 import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { getSneakerDataMock } from "../../mocks/factories/sneakersFactory";
 import { SneakerStructure } from "../../store/sneakers/types";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import SneakerCard from "./SneakerCard";
+import ListPage from "../../pages/ListPage/ListPage";
 
 describe("Given a SneakerCard component", () => {
   const sneakerMock: SneakerStructure = getSneakerDataMock({
@@ -44,6 +46,26 @@ describe("Given a SneakerCard component", () => {
       });
 
       expect(expectedImage).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered and the delete button is clicked on", () => {
+    test("Then it shouldn't show the delete button", async () => {
+      const expectedTitle = sneakerMock.name;
+      const buttonText = "delete";
+
+      renderWithProviders(wrapWithRouter(<ListPage />), {
+        senakersStore: { sneakers: [sneakerMock] },
+      });
+
+      const title = screen.getByRole("heading", { name: expectedTitle });
+      const button = screen.getByRole("button", {
+        name: buttonText,
+      });
+
+      await userEvent.click(button);
+
+      expect(title).not.toBeInTheDocument();
     });
   });
 });

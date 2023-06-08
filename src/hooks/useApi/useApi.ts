@@ -42,7 +42,33 @@ const useApi = () => {
     }
   }, [dispatch, token]);
 
-  return { getSneakers };
+  const deleteSneaker = async (id: string): Promise<void> => {
+    try {
+      dispatch(showLoaderActionCreator());
+
+      await axios.delete<void>(
+        `${apiUrl}${paths.sneakers}${paths.delete}/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Sneaker removed successfully!",
+        })
+      );
+    } catch {
+      const error = "Sneaker couldn't be removed...";
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
+    }
+  };
+
+  return { getSneakers, deleteSneaker };
 };
 
 export default useApi;

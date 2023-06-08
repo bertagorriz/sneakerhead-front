@@ -13,7 +13,7 @@ const Navbar = (): React.ReactElement => {
   const navigate = useNavigate();
   const userState = useAppSelector((store) => store.userStore);
 
-  const logout = () => {
+  const handleOnClick = () => {
     dispatch(logoutUserActionCreator(userState));
 
     removeToken("token");
@@ -88,7 +88,7 @@ const Navbar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <Button actionOnClick={logout} ariaLabel="logout">
+          <Button actionOnClick={handleOnClick} ariaLabel="logout">
             <svg
               className="navbar-list__icon"
               width="48"

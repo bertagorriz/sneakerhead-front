@@ -1,4 +1,8 @@
+import useApi from "../../hooks/useApi/useApi";
+import { useAppDispatch } from "../../store";
+import { deleteSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
 import { SneakerStructure } from "../../store/sneakers/types";
+import { showLoaderActionCreator } from "../../store/ui/uiSlice";
 import Button from "../Button/Button";
 import SneakerCardStyled from "./SneakerCardStyled";
 
@@ -8,9 +12,18 @@ interface SneakerCardProps {
 }
 
 const SneakerCard = ({
-  sneaker: { image, name, brand },
+  sneaker: { image, name, brand, id },
   isLazy,
 }: SneakerCardProps): React.ReactElement => {
+  const { deleteSneaker } = useApi();
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = async () => {
+    dispatch(showLoaderActionCreator());
+    await deleteSneaker(id);
+    dispatch(deleteSneakersActionCreator(id));
+  };
+
   return (
     <SneakerCardStyled className="card">
       <div>
@@ -27,7 +40,11 @@ const SneakerCard = ({
         <h2 className="card__text__name">{name}</h2>
         <span className="card__text__brand">{brand}</span>
       </div>
-      <Button className="button__delete" ariaLabel="delete">
+      <Button
+        className="button__delete"
+        ariaLabel="delete"
+        actionOnClick={handleOnClick}
+      >
         <svg
           width="48"
           height="48"
