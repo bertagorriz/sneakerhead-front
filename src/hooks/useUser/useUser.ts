@@ -29,7 +29,7 @@ const useUser = () => {
       dispatch(
         showFeedbackActionCreator({
           isError: true,
-          message: "Wrong credentials, please try again",
+          message: "Wrong credentials, please try again!",
         })
       );
     }
