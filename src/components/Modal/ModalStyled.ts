@@ -37,6 +37,7 @@ const ModalStyled = styled.div`
 
     &__text {
       font-size: ${(props) => props.theme.fontSize.title};
+      font-weight: ${(props) => props.theme.fontWeight.weight600};
     }
   }
 `;

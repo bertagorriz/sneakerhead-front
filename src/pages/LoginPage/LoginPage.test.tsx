@@ -13,10 +13,10 @@ import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
 import useUser from "../../hooks/useUser/useUser";
 import App from "../../components/App/App";
+import { store } from "../../store";
 
 describe("Given a LoginPage", () => {
   const expectedText = "Login to access to sneakers world";
-
   const usernameLabel = "Username";
   const passwordLabel = "Password";
   const buttonText = "Login";
@@ -56,7 +56,7 @@ describe("Given a LoginPage", () => {
 
   describe("When it is rendered with invalid username credentials", () => {
     test("Then it should show a modal with a 'close' button", async () => {
-      server.resetHandlers(...errorHandlers);
+      server.use(...errorHandlers);
 
       const {
         result: {
@@ -80,6 +80,30 @@ describe("Given a LoginPage", () => {
       const button = await screen.getByRole("button", { name: "close" });
 
       expect(button).toBeInTheDocument();
+    });
+  });
+
+  describe("When the login button is clicked on with invalid credentials", () => {
+    test("Then it should show a modal with 'Wrong credentials, please try again!' message", async () => {
+      server.use(...errorHandlers);
+
+      const expectedMessage = "Wrong credentials, please try again!";
+
+      renderWithProviders(wrapWithRouter(<LoginPage />));
+
+      const usernameInput = screen.getByLabelText(usernameLabel);
+      const passwordInput = screen.getByLabelText(passwordLabel);
+
+      await userEvent.type(usernameInput, userCredentialsMock.username);
+      await userEvent.type(passwordInput, userCredentialsMock.password);
+
+      const loginButton = screen.getByRole("button", { name: buttonText });
+
+      await userEvent.click(loginButton);
+
+      const newMessage = store.getState().uiStore.message;
+
+      expect(newMessage).toBe(expectedMessage);
     });
   });
 });

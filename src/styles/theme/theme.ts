@@ -1,4 +1,3 @@
-import "@fontsource/montserrat";
 import DefaultTheme from "./styled";
 
 const theme: DefaultTheme = {
