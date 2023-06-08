@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LoaderStyled = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.color.secondary}d8;

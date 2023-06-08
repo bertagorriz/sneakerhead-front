@@ -43,12 +43,29 @@ const useApi = () => {
   }, [dispatch, token]);
 
   const deleteSneaker = async (id: string): Promise<void> => {
-    await axios.delete<void>(
-      `${apiUrl}${paths.sneakers}${paths.delete}/${id}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    try {
+      dispatch(showLoaderActionCreator());
+
+      await axios.delete<void>(
+        `${apiUrl}${paths.sneakers}${paths.delete}/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Sneaker removed successfully!",
+        })
+      );
+    } catch {
+      const error = "Sneaker couldn't be removed...";
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
+    }
   };
 
   return { getSneakers, deleteSneaker };
