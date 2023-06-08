@@ -5,6 +5,7 @@ import { wrapWithProviders } from "../../utils/testUtils";
 import { sneakerMock } from "../../mocks/sneakersMock";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
+import { store } from "../../store";
 
 describe("Given a getSneakers function", () => {
   describe("When it is invoked with a valid token", () => {
@@ -38,6 +39,46 @@ describe("Given a getSneakers function", () => {
       const sneakers = getSneakers();
 
       expect(sneakers).rejects.toThrowError(expectedError);
+    });
+  });
+});
+
+describe("Given a deleteSneakers function", () => {
+  describe("When it is invoked with a valid id", () => {
+    test("Then it should show a modal with 'Sneaker removed successfully!' message", async () => {
+      const expectedMessage = "Sneaker removed successfully!";
+
+      const {
+        result: {
+          current: { deleteSneaker },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      await deleteSneaker(sneakerMock[1].id);
+
+      const message = store.getState().uiStore.message;
+
+      expect(message).toBe(expectedMessage);
+    });
+  });
+
+  describe("When it is invoked with an invalid id", () => {
+    test("Then it should show a modal with a close button", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const expectedMessage = "Sneaker couldn't be removed...";
+
+      const {
+        result: {
+          current: { deleteSneaker },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      await deleteSneaker(sneakerMock[1].id);
+
+      const message = store.getState().uiStore.message;
+
+      expect(message).toBe(expectedMessage);
     });
   });
 });
