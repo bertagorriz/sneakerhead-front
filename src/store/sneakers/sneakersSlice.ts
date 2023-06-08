@@ -16,9 +16,20 @@ const sneakersSlice = createSlice({
       ...currentState,
       sneakers: [...action.payload],
     }),
+    deleteSneakers: (
+      currentState: SneakersStateStructure,
+      action: PayloadAction<string>
+    ) => ({
+      ...currentState,
+      sneakers: currentState.sneakers.filter(
+        (sneaker) => sneaker.id !== action.payload
+      ),
+    }),
   },
 });
 
-export const { loadSneakers: loadSneakersActionCreator } =
-  sneakersSlice.actions;
+export const {
+  loadSneakers: loadSneakersActionCreator,
+  deleteSneakers: deleteSneakersActionCreator,
+} = sneakersSlice.actions;
 export const sneakersReducer = sneakersSlice.reducer;
