@@ -42,7 +42,16 @@ const useApi = () => {
     }
   }, [dispatch, token]);
 
-  return { getSneakers };
+  const deleteSneaker = async (id: string): Promise<void> => {
+    await axios.delete<void>(
+      `${apiUrl}${paths.sneakers}${paths.delete}/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  };
+
+  return { getSneakers, deleteSneaker };
 };
 
 export default useApi;
