@@ -8,7 +8,7 @@ import { uiReducer } from "./ui/uiSlice";
 
 const rootReducer = combineReducers({
   userStore: userReducer,
-  senakersStore: sneakersReducer,
+  sneakersStore: sneakersReducer,
   uiStore: uiReducer,
 });
 
