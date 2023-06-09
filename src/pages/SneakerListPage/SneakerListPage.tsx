@@ -3,9 +3,9 @@ import SneakersList from "../../components/SneakersList/SneakersList";
 import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
 import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
-import ListPageStyled from "./ListPageStyled";
+import SneakerListPageStyled from "./SneakerListPageStyled";
 
-const ListPage = (): React.ReactElement => {
+const SneakerListPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getSneakers } = useApi();
 
@@ -15,16 +15,26 @@ const ListPage = (): React.ReactElement => {
 
       if (sneakers) {
         dispatch(loadSneakersActionCreator(sneakers));
+
+        const preconnectElement = await document.createElement("link");
+        preconnectElement.rel = "preload";
+        preconnectElement.as = "image";
+        preconnectElement.href = sneakers[0].image;
+
+        const parent = document.head;
+        const firstChild = document.head.firstChild;
+
+        parent.insertBefore(preconnectElement, firstChild);
       }
     })();
   }, [getSneakers, dispatch]);
 
   return (
-    <ListPageStyled>
+    <SneakerListPageStyled>
       <h1 className="home-title">Home</h1>
       <SneakersList />
-    </ListPageStyled>
+    </SneakerListPageStyled>
   );
 };
 
-export default ListPage;
+export default SneakerListPage;
