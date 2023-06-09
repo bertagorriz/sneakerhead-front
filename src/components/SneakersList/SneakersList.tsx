@@ -3,7 +3,8 @@ import SneakerCard from "../SneakerCard/SneakerCard";
 import SneakersListStyled from "./SneakersListStyled";
 
 const SneakersList = (): React.ReactElement => {
-  const { sneakers } = useAppSelector((store) => store.senakersStore);
+  const { sneakers } = useAppSelector((store) => store.sneakersStore);
+  const { id } = useAppSelector((store) => store.userStore);
   return (
     <SneakersListStyled>
       {sneakers.map((sneaker, index) => (
@@ -11,6 +12,7 @@ const SneakersList = (): React.ReactElement => {
           <SneakerCard
             sneaker={sneaker}
             isLazy={index === 0 ? "eager" : "lazy"}
+            userId={id}
           />
         </li>
       ))}
