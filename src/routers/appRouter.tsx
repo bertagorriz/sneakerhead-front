@@ -4,7 +4,7 @@ import App from "../components/App/App";
 import paths from "./paths/paths";
 import {
   LazyAddSneakerPage,
-  LazyListPage,
+  LazySneakerListPage,
   LazyLoginPage,
 } from "./lazyComponents";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
@@ -30,7 +30,7 @@ const routes: RouteObject[] = [
         path: paths.home,
         element: (
           <Suspense>
-            <LazyListPage />
+            <LazySneakerListPage />
           </Suspense>
         ),
       },

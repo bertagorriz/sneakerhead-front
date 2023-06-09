@@ -3,9 +3,9 @@ import SneakersList from "../../components/SneakersList/SneakersList";
 import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
 import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
-import ListPageStyled from "./ListPageStyled";
+import SneakerListPageStyled from "./SneakerListPageStyled";
 
-const ListPage = (): React.ReactElement => {
+const SneakerListPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getSneakers } = useApi();
 
@@ -20,11 +20,11 @@ const ListPage = (): React.ReactElement => {
   }, [getSneakers, dispatch]);
 
   return (
-    <ListPageStyled>
+    <SneakerListPageStyled>
       <h1 className="home-title">Home</h1>
       <SneakersList />
-    </ListPageStyled>
+    </SneakerListPageStyled>
   );
 };
 
-export default ListPage;
+export default SneakerListPage;

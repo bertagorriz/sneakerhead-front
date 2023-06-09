@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ListPageStyled = styled.div`
+const SneakerListPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -21,4 +21,4 @@ const ListPageStyled = styled.div`
   }
 `;
 
-export default ListPageStyled;
+export default SneakerListPageStyled;
