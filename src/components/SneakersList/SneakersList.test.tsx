@@ -4,7 +4,6 @@ import { getSneakersDataMock } from "../../mocks/factories/sneakersFactory";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import SneakersList from "./SneakersList";
 import { sneakerMock, sneakerMockId } from "../../mocks/sneakersMock";
-import ListPage from "../../pages/ListPage/ListPage";
 import { userLoggedMock } from "../../mocks/userMock";
 
 describe("Given a SneakersList component", () => {
@@ -30,7 +29,7 @@ describe("Given a SneakersList component", () => {
       sneakerMock.push(sneakerMockId);
       const buttonText = "delete";
 
-      renderWithProviders(wrapWithRouter(<ListPage />), {
+      renderWithProviders(wrapWithRouter(<SneakersList />), {
         sneakersStore: { sneakers: sneakerMock },
         userStore: {
           id: userData.id,
