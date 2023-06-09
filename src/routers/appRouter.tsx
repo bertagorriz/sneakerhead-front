@@ -4,6 +4,7 @@ import App from "../components/App/App";
 import paths from "./paths/paths";
 import { LazyListPage, LazyLoginPage } from "./lazyComponents";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import AddSneakerPage from "../pages/AddSneakerPage/AddSneakerPage";
 
 const routes: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const routes: RouteObject[] = [
             <LazyListPage />
           </Suspense>
         ),
+      },
+      {
+        path: paths.addSneaker,
+        element: <AddSneakerPage />,
       },
       {
         path: "/*",
