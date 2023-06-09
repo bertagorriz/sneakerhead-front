@@ -15,6 +15,16 @@ const SneakerListPage = (): React.ReactElement => {
 
       if (sneakers) {
         dispatch(loadSneakersActionCreator(sneakers));
+
+        const preconnectElement = await document.createElement("link");
+        preconnectElement.rel = "preload";
+        preconnectElement.as = "image";
+        preconnectElement.href = sneakers[0].image;
+
+        const parent = document.head;
+        const firstChild = document.head.firstChild;
+
+        parent.insertBefore(preconnectElement, firstChild);
       }
     })();
   }, [getSneakers, dispatch]);
