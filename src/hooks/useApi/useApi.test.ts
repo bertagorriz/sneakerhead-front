@@ -104,10 +104,11 @@ describe("Given an addSneakers function", () => {
   });
 
   describe("When it is invoked with and invalid sneaker data", () => {
-    test("Then it sholud throw an error with 'Sneaker couldn't be added' message", () => {
+    test("Then it sholud throw an error with 'Sneaker couldn't be added... Model already exists!' message", async () => {
       server.resetHandlers(...errorHandlers);
 
-      const expectedError = "Sneaker couldn't be added";
+      const expectedError =
+        "Sneaker couldn't be added... Model already exists!";
 
       const {
         result: {
@@ -115,9 +116,11 @@ describe("Given an addSneakers function", () => {
         },
       } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
 
-      const sneakers = addSneaker(sneakerMockToAdd);
+      await addSneaker(sneakerMockToAdd);
 
-      expect(sneakers).rejects.toThrowError(expectedError);
+      const message = store.getState().uiStore.message;
+
+      expect(message).toBe(expectedError);
     });
   });
 });
