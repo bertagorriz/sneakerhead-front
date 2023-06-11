@@ -104,11 +104,10 @@ describe("Given an addSneakers function", () => {
   });
 
   describe("When it is invoked with and invalid sneaker data", () => {
-    test("Then it sholud throw an error with 'Sneaker couldn't be added... Model already exists!' message", async () => {
+    test("Then it sholud throw an error with 'Sneaker couldn't be added...' message", async () => {
       server.resetHandlers(...errorHandlers);
 
-      const expectedError =
-        "Sneaker couldn't be added... Model already exists!";
+      const expectedError = "Sneaker couldn't be added...";
 
       const {
         result: {
