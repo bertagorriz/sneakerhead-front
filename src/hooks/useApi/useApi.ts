@@ -95,7 +95,7 @@ const useApi = () => {
 
       return newSneaker;
     } catch {
-      const error = "Sneaker couldn't be added... Model already exists!";
+      const error = "Sneaker couldn't be added...";
 
       dispatch(hideLoaderActionCreator());
 
