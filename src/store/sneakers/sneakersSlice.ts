@@ -25,11 +25,19 @@ const sneakersSlice = createSlice({
         (sneaker) => sneaker.id !== action.payload
       ),
     }),
+    addSneakers: (
+      currentState: SneakersStateStructure,
+      action: PayloadAction<SneakerStructure>
+    ) => ({
+      ...currentState,
+      sneakers: [...currentState.sneakers, action.payload],
+    }),
   },
 });
 
 export const {
   loadSneakers: loadSneakersActionCreator,
   deleteSneakers: deleteSneakersActionCreator,
+  addSneakers: addSneakersActionCreator,
 } = sneakersSlice.actions;
 export const sneakersReducer = sneakersSlice.reducer;
