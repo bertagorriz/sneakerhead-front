@@ -13,16 +13,15 @@ const AddSneakerPage = (): React.ReactElement => {
   const navigate = useNavigate();
 
   const onSubmit = async (sneakerData: SneakerAddStructure) => {
-    try {
-      const newSneaker = await addSneaker(sneakerData);
+    const newSneaker = await addSneaker(sneakerData);
 
+    if (newSneaker) {
       dispatch(addSneakersActionCreator(newSneaker));
 
       navigate(paths.home);
-    } catch {
-      return;
     }
   };
+
   return (
     <AddSneakerPageStyled>
       <h1 className="newOne-title">New One</h1>

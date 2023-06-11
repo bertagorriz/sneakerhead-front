@@ -70,8 +70,10 @@ const useApi = () => {
 
   const addSneaker = async (
     sneakerData: Partial<SneakerStructure>
-  ): Promise<SneakerStructure> => {
+  ): Promise<SneakerStructure | undefined> => {
     try {
+      dispatch(showLoaderActionCreator());
+
       const {
         data: { newSneaker },
       } = await axios.post<{ newSneaker: SneakerStructure }>(
@@ -82,11 +84,22 @@ const useApi = () => {
         }
       );
 
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Sneaker added successfully!",
+        })
+      );
+
       return newSneaker;
     } catch {
-      const error = "Sneaker couldn't be added";
+      const error = "Sneaker couldn't be added... Model already exists!";
 
-      throw error;
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
     }
   };
 
