@@ -68,7 +68,29 @@ const useApi = () => {
     }
   };
 
-  return { getSneakers, deleteSneaker };
+  const addSneaker = async (
+    sneakerData: Partial<SneakerStructure>
+  ): Promise<SneakerStructure> => {
+    try {
+      const {
+        data: { newSneaker },
+      } = await axios.post<{ newSneaker: SneakerStructure }>(
+        `${apiUrl}${paths.sneakers}/`,
+        sneakerData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return newSneaker;
+    } catch {
+      const error = "Sneaker couldn't be added";
+
+      throw error;
+    }
+  };
+
+  return { getSneakers, deleteSneaker, addSneaker };
 };
 
 export default useApi;
