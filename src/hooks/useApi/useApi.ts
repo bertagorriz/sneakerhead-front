@@ -68,7 +68,42 @@ const useApi = () => {
     }
   };
 
-  return { getSneakers, deleteSneaker };
+  const addSneaker = async (
+    sneakerData: Partial<SneakerStructure>
+  ): Promise<SneakerStructure | undefined> => {
+    try {
+      dispatch(showLoaderActionCreator());
+
+      const {
+        data: { newSneaker },
+      } = await axios.post<{ newSneaker: SneakerStructure }>(
+        `${apiUrl}${paths.sneakers}/`,
+        sneakerData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Sneaker added successfully!",
+        })
+      );
+
+      return newSneaker;
+    } catch {
+      const error = "Sneaker couldn't be added... Model already exists!";
+
+      dispatch(hideLoaderActionCreator());
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
+    }
+  };
+
+  return { getSneakers, deleteSneaker, addSneaker };
 };
 
 export default useApi;

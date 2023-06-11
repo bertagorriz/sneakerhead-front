@@ -22,6 +22,18 @@ const sneakersFactory = Factory.define<SneakerStructure>(() => ({
   user: faker.database.mongodbObjectId().toString(),
 }));
 
+const sneakerToAddFactory = Factory.define<Partial<SneakerStructure>>(() => ({
+  name: faker.person.firstName(),
+  brand: faker.company.name(),
+  image: faker.image.url(),
+  price: faker.number.int({ min: 80, max: 400 }),
+  colors: faker.helpers.arrayElements(["Grey"]),
+  features: {
+    description: faker.commerce.productDescription(),
+    isAvailable: faker.datatype.boolean(),
+  },
+}));
+
 export const getSneakersDataMock = (
   howMany: number,
   data?: Partial<SneakerStructure>
@@ -29,3 +41,6 @@ export const getSneakersDataMock = (
 
 export const getSneakerDataMock = (data?: Partial<SneakerStructure>) =>
   sneakersFactory.build(data);
+
+export const getSneakerToAdd = (data?: Partial<SneakerStructure>) =>
+  sneakerToAddFactory.build(data);

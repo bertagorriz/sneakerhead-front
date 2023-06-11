@@ -18,3 +18,12 @@ export interface FeaturesSneakerStructure {
 export interface SneakersStateStructure {
   sneakers: SneakerStructure[];
 }
+
+export interface SneakerAddStructure {
+  name: string;
+  brand: string;
+  image: string;
+  price: number;
+  colors: string[];
+  features: FeaturesSneakerStructure;
+}
