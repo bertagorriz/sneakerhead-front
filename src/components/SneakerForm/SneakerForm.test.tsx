@@ -4,12 +4,15 @@ import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import SneakerForm from "./SneakerForm";
 import { getSneakerDataMock } from "../../mocks/factories/sneakersFactory";
 import { SneakerStructure } from "../../store/sneakers/types";
+import { vi } from "vitest";
 
 const sneakerMockDetails: SneakerStructure = getSneakerDataMock({
   name: "990v5",
   brand: "New Balance",
   image: "Model 990v5 from New Balance",
 });
+
+const actionOnClick = vi.fn();
 
 describe("Given a SneakerForm component", () => {
   const nameLabel = /model/i;
@@ -24,7 +27,9 @@ describe("Given a SneakerForm component", () => {
 
   describe("When it is rendered", () => {
     test("Then it should show model, brand, image url, price €, colors, description, description2 and availability labels with their inputs", () => {
-      renderWithProviders(wrapWithRouter(<SneakerForm />));
+      renderWithProviders(
+        wrapWithRouter(<SneakerForm handleOnSubmit={actionOnClick} />)
+      );
 
       const nameInput = screen.getByLabelText(nameLabel);
       const brandInput = screen.getByLabelText(brandLabel);
@@ -46,7 +51,9 @@ describe("Given a SneakerForm component", () => {
     });
 
     test("Then it should show a button with 'add' text", () => {
-      renderWithProviders(wrapWithRouter(<SneakerForm />));
+      renderWithProviders(
+        wrapWithRouter(<SneakerForm handleOnSubmit={actionOnClick} />)
+      );
 
       const button = screen.getByRole("button", { name: buttonText });
 
@@ -54,7 +61,9 @@ describe("Given a SneakerForm component", () => {
     });
 
     test("Then it should show the button with 'add' text disabled", () => {
-      renderWithProviders(wrapWithRouter(<SneakerForm />));
+      renderWithProviders(
+        wrapWithRouter(<SneakerForm handleOnSubmit={actionOnClick} />)
+      );
 
       const button = screen.getByRole("button", { name: buttonText });
 
@@ -81,7 +90,9 @@ describe("Given a SneakerForm component", () => {
       const priceText = "10";
       const descriptionText = sneakerMockDetails.features.description;
 
-      renderWithProviders(wrapWithRouter(<SneakerForm />));
+      renderWithProviders(
+        wrapWithRouter(<SneakerForm handleOnSubmit={actionOnClick} />)
+      );
 
       await userEvent.type(screen.getByLabelText(nameLabel), nameText);
 
@@ -157,6 +168,10 @@ describe("Given a SneakerForm component", () => {
       const button = screen.getByRole("button", { name: buttonText });
 
       expect(button).toBeEnabled();
-    });
+
+      await userEvent.click(button);
+
+      expect(actionOnClick).toHaveBeenCalled();
+    }, 50000);
   });
 });
