@@ -1,11 +1,16 @@
 import { useState } from "react";
 import Button from "../Button/Button";
 import SneakerFormStyled from "./SneakerFormStyled";
-import { SneakerStructure } from "../../store/sneakers/types";
+import { SneakerAddStructure } from "../../store/sneakers/types";
 
-const SneakerForm = (): React.ReactElement => {
-  const initialSneakerState: SneakerStructure = {
-    id: "",
+interface SneakerFormProps {
+  handleOnSubmit: (sneakerData: SneakerAddStructure) => void;
+}
+
+const SneakerForm = ({
+  handleOnSubmit,
+}: SneakerFormProps): React.ReactElement => {
+  const initialSneakerState: SneakerAddStructure = {
     name: "",
     brand: "",
     image: "",
@@ -16,9 +21,8 @@ const SneakerForm = (): React.ReactElement => {
       description2: "",
       isAvailable: false,
     },
-    user: "",
   };
-  const [currentSneakerState, setSneakerState] = useState(initialSneakerState);
+  const [sneakerData, setSneakerData] = useState(initialSneakerState);
 
   const onChangeData = (
     event:
@@ -26,64 +30,73 @@ const SneakerForm = (): React.ReactElement => {
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSneakerState({
-      ...currentSneakerState,
+    setSneakerData({
+      ...sneakerData,
       [event.target.id]: event.target.value,
     });
   };
 
   const onChangeColors = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedColor = event.target.value;
-    const isSelected = currentSneakerState.colors.includes(selectedColor);
+    const isSelected = sneakerData.colors.includes(selectedColor);
 
     let newColors = [];
 
     if (!isSelected) {
-      newColors = [...currentSneakerState.colors, selectedColor];
+      newColors = [...sneakerData.colors, selectedColor];
     } else {
-      newColors = currentSneakerState.colors.filter(
-        (color) => color !== selectedColor
-      );
+      newColors = sneakerData.colors.filter((color) => color !== selectedColor);
     }
 
-    setSneakerState({
-      ...currentSneakerState,
+    setSneakerData({
+      ...sneakerData,
       colors: newColors,
     });
   };
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSneakerState({
-      ...currentSneakerState,
+    setSneakerData({
+      ...sneakerData,
       features: {
-        ...currentSneakerState.features,
+        ...sneakerData.features,
         [event.target.id]: event.target.checked,
       },
     });
   };
 
   const onChangeFeatures = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSneakerState({
-      ...currentSneakerState,
+    setSneakerData({
+      ...sneakerData,
       features: {
-        ...currentSneakerState.features,
+        ...sneakerData.features,
         [event.target.id]: event.target.value,
       },
     });
   };
 
+  const actionOnClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    handleOnSubmit(sneakerData);
+    setSneakerData(initialSneakerState);
+  };
+
   const colorsArray: string[] = [];
 
   const isReady =
-    currentSneakerState.name !== "" &&
-    currentSneakerState.brand !== "" &&
-    currentSneakerState.image !== "" &&
-    currentSneakerState.price !== 0 &&
-    currentSneakerState.colors !== colorsArray &&
-    currentSneakerState.features.description !== "";
+    sneakerData.name !== "" &&
+    sneakerData.brand !== "" &&
+    sneakerData.image !== "" &&
+    sneakerData.price !== 0 &&
+    sneakerData.colors !== colorsArray &&
+    sneakerData.features.description !== "";
 
   return (
-    <SneakerFormStyled className="form" autoComplete="off" noValidate>
+    <SneakerFormStyled
+      className="form"
+      autoComplete="off"
+      onSubmit={actionOnClick}
+      noValidate
+    >
       <label className="form__label" htmlFor="name">
         Model
       </label>
@@ -91,7 +104,7 @@ const SneakerForm = (): React.ReactElement => {
         type="text"
         className="form__input"
         id="name"
-        value={currentSneakerState.name}
+        value={sneakerData.name}
         onChange={onChangeData}
       />
       <label className="form__label" htmlFor="brand">
@@ -122,7 +135,7 @@ const SneakerForm = (): React.ReactElement => {
         type="text"
         className="form__input"
         id="image"
-        value={currentSneakerState.image}
+        value={sneakerData.image}
         onChange={onChangeData}
       />
       <label className="form__label" htmlFor="price">
@@ -132,7 +145,7 @@ const SneakerForm = (): React.ReactElement => {
         type="number"
         className="form__input"
         id="price"
-        value={currentSneakerState.price || ""}
+        value={sneakerData.price || ""}
         onChange={onChangeData}
       />
       <p className="form__label" aria-label="colors">
@@ -278,7 +291,7 @@ const SneakerForm = (): React.ReactElement => {
         id="description"
         rows={4}
         placeholder="add a description..."
-        value={currentSneakerState.features.description}
+        value={sneakerData.features.description}
         onChange={onChangeFeatures}
       />
       <label className="form__label" htmlFor="description2">
@@ -289,7 +302,7 @@ const SneakerForm = (): React.ReactElement => {
         id="description2"
         rows={4}
         placeholder="would you like to add another description?..."
-        value={currentSneakerState.features.description2}
+        value={sneakerData.features.description2}
         onChange={onChangeFeatures}
       />
       <p className="form__label">Availability</p>
@@ -298,7 +311,7 @@ const SneakerForm = (): React.ReactElement => {
           type="checkbox"
           className="form__checkbox"
           id="isAvailable"
-          checked={currentSneakerState.features.isAvailable}
+          checked={sneakerData.features.isAvailable}
           onChange={onChangeCheckbox}
         />
         <label className="form__checkbox-label" htmlFor="isAvailable">
@@ -310,6 +323,7 @@ const SneakerForm = (): React.ReactElement => {
         className="form__button"
         text="Add"
         disabled={!isReady}
+        actionOnClick={() => handleOnSubmit}
       />
     </SneakerFormStyled>
   );
