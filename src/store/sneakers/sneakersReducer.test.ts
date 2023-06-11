@@ -1,9 +1,17 @@
-import { getSneakersDataMock } from "../../mocks/factories/sneakersFactory";
-import { deleteSneakersActionCreator, sneakersReducer } from "./sneakersSlice";
+import {
+  getSneakerDataMock,
+  getSneakersDataMock,
+} from "../../mocks/factories/sneakersFactory";
+import {
+  addSneakersActionCreator,
+  deleteSneakersActionCreator,
+  sneakersReducer,
+} from "./sneakersSlice";
 import { loadSneakersActionCreator } from "./sneakersSlice";
 import { SneakersStateStructure } from "./types";
 
 const sneakersList = getSneakersDataMock(5);
+const sneakerToAdd = getSneakerDataMock();
 
 describe("Given a loadSneakers reducer", () => {
   describe("When it receives an empty current state and loadSneakers action with a list of 5 sneakers", () => {
@@ -38,6 +46,27 @@ describe("Given a deleteSneakers reducer", () => {
       );
 
       expect(newSneakersState.sneakers).toHaveLength(4);
+    });
+  });
+});
+
+describe("Given an addSneakers reducer", () => {
+  describe("When it receives a current state with a list of 5 sneakers and an addSneakers action with a new sneaker", () => {
+    test("Then it should return the list with the new sneaker added", () => {
+      const initialSneakersState: SneakersStateStructure = {
+        sneakers: sneakersList,
+      };
+
+      const expectedSneakersState: SneakersStateStructure = {
+        sneakers: [...initialSneakersState.sneakers, sneakerToAdd],
+      };
+
+      const newSneakersState = sneakersReducer(
+        initialSneakersState,
+        addSneakersActionCreator(sneakerToAdd)
+      );
+
+      expect(newSneakersState).toStrictEqual(expectedSneakersState);
     });
   });
 });
