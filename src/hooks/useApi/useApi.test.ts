@@ -2,7 +2,11 @@ import { renderHook } from "@testing-library/react";
 import { SneakerStructure } from "../../store/sneakers/types";
 import useApi from "./useApi";
 import { wrapWithProviders } from "../../utils/testUtils";
-import { sneakerMock } from "../../mocks/sneakersMock";
+import {
+  sneakerMock,
+  sneakerMockAdded,
+  sneakerMockToAdd,
+} from "../../mocks/sneakersMock";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
 import { store } from "../../store";
@@ -79,6 +83,41 @@ describe("Given a deleteSneakers function", () => {
       const message = store.getState().uiStore.message;
 
       expect(message).toBe(expectedMessage);
+    });
+  });
+});
+
+describe("Given an addSneakers function", () => {
+  describe("When it is invoked with a valid senaker data", () => {
+    test("Then it should return the new sneaker", async () => {
+      const expectedSneaker = sneakerMockAdded;
+      const {
+        result: {
+          current: { addSneaker },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      const sneakerToAdd = await addSneaker(sneakerMockToAdd);
+
+      expect(sneakerToAdd).toStrictEqual(expectedSneaker);
+    });
+  });
+
+  describe("When it is invoked with and invalid sneaker data", () => {
+    test("Then it sholud throw an error with 'Sneaker couldn't be added' message", () => {
+      server.resetHandlers(...errorHandlers);
+
+      const expectedError = "Sneaker couldn't be added";
+
+      const {
+        result: {
+          current: { addSneaker },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      const sneakers = addSneaker(sneakerMockToAdd);
+
+      expect(sneakers).rejects.toThrowError(expectedError);
     });
   });
 });
