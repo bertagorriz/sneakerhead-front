@@ -20,6 +20,11 @@ export interface SneakersStateStructure {
   limit: number;
 }
 
+export interface SneakersApiStructure {
+  sneakers: SneakerStructure[];
+  totalSneakers: number;
+}
+
 export interface SneakerAddStructure {
   name: string;
   brand: string;

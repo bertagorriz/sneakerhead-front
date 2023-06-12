@@ -1,20 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SneakersList from "../../components/SneakersList/SneakersList";
 import useApi from "../../hooks/useApi/useApi";
-import { useAppDispatch } from "../../store";
-import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
+import { useAppDispatch, useAppSelector } from "../../store";
+import {
+  loadMoreSneakersActionCreator,
+  loadSneakersActionCreator,
+} from "../../store/sneakers/sneakersSlice";
 import SneakerListPageStyled from "./SneakerListPageStyled";
 import Pagination from "../../components/Pagination/Pagination";
 
 const SneakerListPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getSneakers } = useApi();
+  const { sneakers } = useAppSelector((state) => state.sneakersStore);
+  const [totalSneakers, setTotalSneakers] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const sneakers = await getSneakers();
+      const response = await getSneakers();
 
-      if (sneakers) {
+      if (response) {
+        const { sneakers, totalSneakers } = response;
+
+        setTotalSneakers(totalSneakers);
+
         dispatch(loadSneakersActionCreator(sneakers));
 
         const preconnectElement = await document.createElement("link");
@@ -30,11 +39,17 @@ const SneakerListPage = (): React.ReactElement => {
     })();
   }, [getSneakers, dispatch]);
 
+  const handleOnLoadMore = () => {
+    dispatch(loadMoreSneakersActionCreator());
+  };
+
   return (
     <SneakerListPageStyled>
       <h1 className="home-title">Home</h1>
       <SneakersList />
-      <Pagination />
+      {sneakers.length !== totalSneakers && (
+        <Pagination actionOnClick={handleOnLoadMore} />
+      )}
     </SneakerListPageStyled>
   );
 };

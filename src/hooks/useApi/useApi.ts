@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import axios from "axios";
 import {
   SneakerStructure,
-  SneakersStateStructure,
+  SneakersApiStructure,
 } from "../../store/sneakers/types";
 import { useAppDispatch, useAppSelector } from "../../store";
 import paths from "../../routers/paths/paths";
@@ -16,16 +16,18 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 const useApi = () => {
   const { token } = useAppSelector((state) => state.userStore);
+  const { limit } = useAppSelector((state) => state.sneakersStore);
+
   const dispatch = useAppDispatch();
 
-  const getSneakers = useCallback(async (): Promise<SneakerStructure[]> => {
+  const getSneakers = useCallback(async (): Promise<SneakersApiStructure> => {
     try {
       dispatch(showLoaderActionCreator());
 
       const {
-        data: { sneakers },
-      } = await axios.get<SneakersStateStructure>(
-        `${apiUrl}${paths.sneakers}`,
+        data: { sneakers, totalSneakers },
+      } = await axios.get<SneakersApiStructure>(
+        `${apiUrl}${paths.sneakers}?limit=${limit}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -33,14 +35,14 @@ const useApi = () => {
 
       dispatch(hideLoaderActionCreator());
 
-      return sneakers;
+      return { sneakers, totalSneakers };
     } catch {
       const error = "Sorry, sneakers couldn't be loaded";
 
       dispatch(showFeedbackActionCreator({ isError: true, message: error }));
       throw error;
     }
-  }, [dispatch, token]);
+  }, [dispatch, token, limit]);
 
   const deleteSneaker = async (id: string): Promise<void> => {
     try {

@@ -1,7 +1,11 @@
 import { rest } from "msw";
 import { tokenMock } from "./tokenMock";
 import paths from "../routers/paths/paths";
-import { sneakerMock, sneakerMockAdded } from "./sneakersMock";
+import {
+  sneakerLoadMoreMock,
+  sneakerMock,
+  sneakerMockAdded,
+} from "./sneakersMock";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,7 +15,10 @@ export const handlers = [
   }),
 
   rest.get(`${apiUrl}${paths.sneakers}`, (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ sneakers: sneakerMock }));
+    return res(
+      ctx.status(200),
+      ctx.json({ sneakers: sneakerMock, totalSneakers: sneakerMock.length })
+    );
   }),
 
   rest.delete(
@@ -47,5 +54,17 @@ export const errorHandlers = [
 
   rest.post(`${apiUrl}${paths.sneakers}/`, (_req, res, ctx) => {
     return res(ctx.status(401));
+  }),
+];
+
+export const paginationHandlers = [
+  rest.get(`${apiUrl}${paths.sneakers}`, (_req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        sneakers: sneakerLoadMoreMock,
+        totalSneakers: 5,
+      })
+    );
   }),
 ];

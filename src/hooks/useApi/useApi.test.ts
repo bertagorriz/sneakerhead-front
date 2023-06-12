@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { SneakerStructure } from "../../store/sneakers/types";
+import { SneakersApiStructure } from "../../store/sneakers/types";
 import useApi from "./useApi";
 import { wrapWithProviders } from "../../utils/testUtils";
 import {
@@ -14,7 +14,10 @@ import { store } from "../../store";
 describe("Given a getSneakers function", () => {
   describe("When it is invoked with a valid token", () => {
     test("Then it should return a list of sneakers", async () => {
-      const sneakersList: SneakerStructure[] = sneakerMock;
+      const sneakersList: SneakersApiStructure = {
+        sneakers: sneakerMock,
+        totalSneakers: sneakerMock.length,
+      };
 
       const {
         result: {
