@@ -40,13 +40,9 @@ const SneakerForm = ({
     const selectedColor = event.target.value;
     const isSelected = sneakerData.colors.includes(selectedColor);
 
-    let newColors = [];
-
-    if (!isSelected) {
-      newColors = [...sneakerData.colors, selectedColor];
-    } else {
-      newColors = sneakerData.colors.filter((color) => color !== selectedColor);
-    }
+    const newColors = isSelected
+      ? sneakerData.colors.filter((color) => color !== selectedColor)
+      : [...sneakerData.colors, selectedColor];
 
     setSneakerData({
       ...sneakerData,
@@ -74,10 +70,27 @@ const SneakerForm = ({
     });
   };
 
+  const setColorCheckboxes = () => {
+    const colorCheckboxes = document.querySelectorAll(".form__checkbox");
+    colorCheckboxes.forEach((checkbox) => {
+      const checkboxValue = checkbox as HTMLInputElement;
+      checkboxValue.checked = false;
+    });
+  };
+
+  const setBrandSelector = () => {
+    const brandSelector = document.querySelector(
+      ".form__select"
+    ) as HTMLSelectElement;
+    brandSelector.selectedIndex = 0;
+  };
+
   const actionOnClick = (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     handleOnSubmit(sneakerData);
     setSneakerData(initialSneakerState);
+    setColorCheckboxes();
+    setBrandSelector();
   };
 
   const colorsArray: string[] = [];
@@ -123,7 +136,6 @@ const SneakerForm = ({
         <option value="ASICS">ASICS</option>
         <option value="Under Armour">Under Armour</option>
         <option value="Salomon">Salomon</option>
-        <option value="Saucony">Saucony</option>
         <option value="HOKA">HOKA</option>
         <option value="Mizuno">Mizuno</option>
         <option value="Veja">Veja</option>
