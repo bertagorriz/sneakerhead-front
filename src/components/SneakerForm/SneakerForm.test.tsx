@@ -130,9 +130,6 @@ describe("Given a SneakerForm component", () => {
         "Salomon",
       ]);
       await userEvent.selectOptions(screen.getByLabelText(brandLabel), [
-        "Saucony",
-      ]);
-      await userEvent.selectOptions(screen.getByLabelText(brandLabel), [
         "HOKA",
       ]);
       await userEvent.selectOptions(screen.getByLabelText(brandLabel), [
