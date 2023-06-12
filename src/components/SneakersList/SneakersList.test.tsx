@@ -11,6 +11,7 @@ describe("Given a SneakersList component", () => {
     test("Then it should show '990v5' heading", async () => {
       const sneakersMock = {
         sneakers: getSneakersDataMock(1, { name: "990v5" }),
+        limit: 5,
       };
 
       renderWithProviders(<SneakersList />, { sneakersStore: sneakersMock });
@@ -30,7 +31,7 @@ describe("Given a SneakersList component", () => {
       const buttonText = "delete";
 
       renderWithProviders(wrapWithRouter(<SneakersList />), {
-        sneakersStore: { sneakers: sneakerMock },
+        sneakersStore: { sneakers: sneakerMock, limit: sneakerMock.length },
         userStore: {
           id: userData.id,
           isLogged: userData.isLogged,

@@ -3,6 +3,7 @@ import { SneakerStructure, SneakersStateStructure } from "./types";
 
 const initialState: SneakersStateStructure = {
   sneakers: [],
+  limit: 5,
 };
 
 const sneakersSlice = createSlice({
@@ -32,6 +33,10 @@ const sneakersSlice = createSlice({
       ...currentState,
       sneakers: [...currentState.sneakers, action.payload],
     }),
+    loadMoreSneakers: (currentState): SneakersStateStructure => ({
+      ...currentState,
+      limit: currentState.limit + 5,
+    }),
   },
 });
 
@@ -39,5 +44,6 @@ export const {
   loadSneakers: loadSneakersActionCreator,
   deleteSneakers: deleteSneakersActionCreator,
   addSneakers: addSneakersActionCreator,
+  loadMoreSneakers: loadMoreSneakersActionCreator,
 } = sneakersSlice.actions;
 export const sneakersReducer = sneakersSlice.reducer;

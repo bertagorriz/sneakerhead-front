@@ -17,6 +17,7 @@ export interface FeaturesSneakerStructure {
 
 export interface SneakersStateStructure {
   sneakers: SneakerStructure[];
+  limit: number;
 }
 
 export interface SneakerAddStructure {
