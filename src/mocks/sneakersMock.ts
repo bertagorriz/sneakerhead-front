@@ -6,6 +6,8 @@ import {
 
 export const sneakerMock = getSneakersDataMock(3);
 
+export const sneakerLoadMoreMock = getSneakersDataMock(10);
+
 export const sneakerMockId = getSneakerDataMock({
   user: "647104a861b26ee42aa5398b",
 });
