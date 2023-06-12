@@ -86,7 +86,7 @@ const SneakerForm = ({
   };
 
   const actionOnClick = (event: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
+    event.preventDefault();
     handleOnSubmit(sneakerData);
     setSneakerData(initialSneakerState);
     setColorCheckboxes();

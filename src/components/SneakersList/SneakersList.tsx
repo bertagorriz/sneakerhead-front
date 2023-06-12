@@ -11,7 +11,7 @@ const SneakersList = (): React.ReactElement => {
         <li className="sneaker" key={sneaker.id}>
           <SneakerCard
             sneaker={sneaker}
-            isLazy={index === 0 ? "eager" : "lazy"}
+            isLazy={index < 3 ? "eager" : "lazy"}
             userId={id}
           />
         </li>
