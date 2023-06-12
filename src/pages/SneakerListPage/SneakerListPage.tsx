@@ -4,6 +4,7 @@ import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
 import { loadSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
 import SneakerListPageStyled from "./SneakerListPageStyled";
+import Pagination from "../../components/Pagination/Pagination";
 
 const SneakerListPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const SneakerListPage = (): React.ReactElement => {
     <SneakerListPageStyled>
       <h1 className="home-title">Home</h1>
       <SneakersList />
+      <Pagination />
     </SneakerListPageStyled>
   );
 };
