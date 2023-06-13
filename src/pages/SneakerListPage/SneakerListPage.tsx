@@ -15,6 +15,8 @@ const SneakerListPage = (): React.ReactElement => {
   const { sneakers } = useAppSelector((state) => state.sneakersStore);
   const [totalSneakers, setTotalSneakers] = useState(0);
 
+  scrollTo(0, 0);
+
   useEffect(() => {
     (async () => {
       const response = await getSneakers();

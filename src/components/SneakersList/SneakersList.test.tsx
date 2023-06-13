@@ -12,14 +12,16 @@ import { userLoggedMock } from "../../mocks/userMock";
 
 describe("Given a SneakersList component", () => {
   describe("When it is rendered", () => {
-    test("Then it should show '990v5' heading", async () => {
+    test("Then it should show the name of the first sneaker as heading", async () => {
       const sneakersMock = {
-        sneakers: getSneakersDataMock(1, { name: "990v5" }),
+        sneakers: getSneakersDataMock(1),
         limit: 5,
         sneaker: sneakerEmptyMock,
       };
 
-      renderWithProviders(<SneakersList />, { sneakersStore: sneakersMock });
+      renderWithProviders(wrapWithRouter(<SneakersList />), {
+        sneakersStore: sneakersMock,
+      });
 
       const expectedTitle = screen.getByRole("heading", {
         name: sneakersMock.sneakers[0].name,
