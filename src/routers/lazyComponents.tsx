@@ -12,3 +12,7 @@ export const LazyAddSneakerPage = lazy(
 export const LazyNotFoundPage = lazy(
   () => import("../pages/NotFoundPage/NotFoundPage")
 );
+
+export const LazySneakerDetailPageStyled = lazy(
+  () => import("../pages/SneakerDetailPage/SneakerDetailPage")
+);
