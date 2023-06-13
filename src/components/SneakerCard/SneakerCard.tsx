@@ -1,6 +1,9 @@
 import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
-import { deleteSneakersActionCreator } from "../../store/sneakers/sneakersSlice";
+import {
+  deleteSneakersActionCreator,
+  loadSneakersActionCreator,
+} from "../../store/sneakers/sneakersSlice";
 import { SneakerStructure } from "../../store/sneakers/types";
 import Button from "../Button/Button";
 import SneakerCardStyled from "./SneakerCardStyled";
@@ -16,12 +19,21 @@ const SneakerCard = ({
   isLazy,
   userId,
 }: SneakerCardProps): React.ReactElement => {
-  const { deleteSneaker } = useApi();
+  const { deleteSneaker, getSneakers } = useApi();
   const dispatch = useAppDispatch();
 
   const handleOnClick = async () => {
     await deleteSneaker(id);
     dispatch(deleteSneakersActionCreator(id));
+
+    const response = await getSneakers();
+
+    if (response) {
+      const { sneakers } = response;
+
+      await getSneakers();
+      dispatch(loadSneakersActionCreator(sneakers));
+    }
   };
 
   return (
