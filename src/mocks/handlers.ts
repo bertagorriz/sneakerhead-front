@@ -34,6 +34,10 @@ export const handlers = [
   rest.post(`${apiUrl}${paths.sneakers}/`, (_req, res, ctx) => {
     return res(ctx.status(201), ctx.json({ newSneaker: sneakerMockAdded }));
   }),
+
+  rest.get(`${apiUrl}${paths.sneakers}/:id`, (_req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ sneaker: sneakerMockAdded }));
+  }),
 ];
 
 export const errorHandlers = [
@@ -54,6 +58,10 @@ export const errorHandlers = [
 
   rest.post(`${apiUrl}${paths.sneakers}/`, (_req, res, ctx) => {
     return res(ctx.status(401));
+  }),
+
+  rest.get(`${apiUrl}${paths.sneakers}/:id`, (_req, res, ctx) => {
+    return res(ctx.status(404));
   }),
 ];
 
