@@ -106,7 +106,7 @@ describe("Given an addSneakers function", () => {
     });
   });
 
-  describe("When it is invoked with and invalid sneaker data", () => {
+  describe("When it is invoked with an invalid sneaker data", () => {
     test("Then it sholud throw an error with 'Sneaker couldn't be added...' message", async () => {
       server.resetHandlers(...errorHandlers);
 
@@ -119,6 +119,45 @@ describe("Given an addSneakers function", () => {
       } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
 
       await addSneaker(sneakerMockToAdd);
+
+      const message = store.getState().uiStore.message;
+
+      expect(message).toBe(expectedError);
+    });
+  });
+});
+
+describe("Given a getSneakersById function", () => {
+  const id = "646fb28a61b26ee42aa53976";
+  describe("When it is invoked with a valid id", () => {
+    test("Then it should return the beach with the id", async () => {
+      const expectedSneaker = sneakerMockAdded;
+
+      const {
+        result: {
+          current: { getSneakerById },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      const sneaker = await getSneakerById(id);
+
+      expect(sneaker).toStrictEqual(expectedSneaker);
+    });
+  });
+
+  describe("When it is invoked with an invalid id", () => {
+    test("Then it should throw an error with 'Couldn't find the sneaker...' message", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const expectedError = "Couldn't find the sneaker...";
+
+      const {
+        result: {
+          current: { getSneakerById },
+        },
+      } = renderHook(() => useApi(), { wrapper: wrapWithProviders });
+
+      await getSneakerById(id);
 
       const message = store.getState().uiStore.message;
 

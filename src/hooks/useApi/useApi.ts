@@ -105,7 +105,32 @@ const useApi = () => {
     }
   };
 
-  return { getSneakers, deleteSneaker, addSneaker };
+  const getSneakerById = async (
+    id: string
+  ): Promise<SneakerStructure | undefined> => {
+    try {
+      dispatch(showLoaderActionCreator());
+
+      const {
+        data: { sneaker },
+      } = await axios.get<{ sneaker: SneakerStructure }>(
+        `${apiUrl}${paths.sneakers}/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(hideLoaderActionCreator());
+
+      return sneaker;
+    } catch {
+      const error = "Couldn't find the sneaker...";
+
+      dispatch(showFeedbackActionCreator({ isError: true, message: error }));
+    }
+  };
+
+  return { getSneakers, deleteSneaker, addSneaker, getSneakerById };
 };
 
 export default useApi;
