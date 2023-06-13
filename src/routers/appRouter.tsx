@@ -6,8 +6,8 @@ import {
   LazyAddSneakerPage,
   LazySneakerListPage,
   LazyLoginPage,
+  LazyNotFoundPage,
 } from "./lazyComponents";
-import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 const routes: RouteObject[] = [
   {
@@ -43,8 +43,12 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: "/*",
-        element: <NotFoundPage />,
+        path: "*",
+        element: (
+          <Suspense>
+            <LazyNotFoundPage />
+          </Suspense>
+        ),
       },
     ],
   },
