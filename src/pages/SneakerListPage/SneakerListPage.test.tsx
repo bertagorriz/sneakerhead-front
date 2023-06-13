@@ -5,7 +5,10 @@ import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import SneakerListPage from "./SneakerListPage";
 import { server } from "../../mocks/server";
 import { paginationHandlers } from "../../mocks/handlers";
-import { sneakerLoadMoreMock } from "../../mocks/sneakersMock";
+import {
+  sneakerEmptyMock,
+  sneakerLoadMoreMock,
+} from "../../mocks/sneakersMock";
 
 describe("Given a SneakerListPage", () => {
   describe("When it is rendered", () => {
@@ -31,7 +34,11 @@ describe("Given a SneakerListPage", () => {
       const buttonText = "pagination";
 
       renderWithProviders(wrapWithRouter(<SneakerListPage />), {
-        sneakersStore: { sneakers: sneakerLoadMoreMock, limit: 5 },
+        sneakersStore: {
+          sneakers: sneakerLoadMoreMock,
+          limit: 5,
+          sneaker: sneakerEmptyMock,
+        },
       });
 
       const button = screen.getByLabelText(buttonText);

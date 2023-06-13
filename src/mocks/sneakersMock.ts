@@ -1,3 +1,4 @@
+import { SneakerStructure } from "../store/sneakers/types";
 import {
   getSneakerDataMock,
   getSneakerToAdd,
@@ -19,3 +20,18 @@ export const sneakerMockAdded = getSneakerDataMock({
   id: "646fb28a61b26ee42aa53976",
   user: "647104a861b26ee42aa5398b",
 });
+
+export const sneakerEmptyMock: SneakerStructure = {
+  id: "",
+  name: "",
+  brand: "",
+  image: "",
+  price: 0,
+  colors: [],
+  features: {
+    description: "",
+    description2: "",
+    isAvailable: false,
+  },
+  user: "",
+};

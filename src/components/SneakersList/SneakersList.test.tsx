@@ -3,7 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { getSneakersDataMock } from "../../mocks/factories/sneakersFactory";
 import { renderWithProviders, wrapWithRouter } from "../../utils/testUtils";
 import SneakersList from "./SneakersList";
-import { sneakerMock, sneakerMockId } from "../../mocks/sneakersMock";
+import {
+  sneakerEmptyMock,
+  sneakerMock,
+  sneakerMockId,
+} from "../../mocks/sneakersMock";
 import { userLoggedMock } from "../../mocks/userMock";
 
 describe("Given a SneakersList component", () => {
@@ -12,6 +16,7 @@ describe("Given a SneakersList component", () => {
       const sneakersMock = {
         sneakers: getSneakersDataMock(1, { name: "990v5" }),
         limit: 5,
+        sneaker: sneakerEmptyMock,
       };
 
       renderWithProviders(<SneakersList />, { sneakersStore: sneakersMock });
@@ -31,7 +36,11 @@ describe("Given a SneakersList component", () => {
       const buttonText = "delete";
 
       renderWithProviders(wrapWithRouter(<SneakersList />), {
-        sneakersStore: { sneakers: sneakerMock, limit: sneakerMock.length },
+        sneakersStore: {
+          sneakers: sneakerMock,
+          limit: sneakerMock.length,
+          sneaker: sneakerEmptyMock,
+        },
         userStore: {
           id: userData.id,
           isLogged: userData.isLogged,

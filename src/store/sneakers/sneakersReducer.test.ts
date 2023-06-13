@@ -2,10 +2,12 @@ import {
   getSneakerDataMock,
   getSneakersDataMock,
 } from "../../mocks/factories/sneakersFactory";
+import { sneakerEmptyMock } from "../../mocks/sneakersMock";
 import {
   addSneakersActionCreator,
   deleteSneakersActionCreator,
   loadMoreSneakersActionCreator,
+  loadSneakerByIdActionCreator,
   sneakersReducer,
 } from "./sneakersSlice";
 import { loadSneakersActionCreator } from "./sneakersSlice";
@@ -21,10 +23,12 @@ describe("Given a loadSneakers reducer", () => {
       const initialSneakersState: SneakersStateStructure = {
         sneakers: [],
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
       const expectedSneakersState: SneakersStateStructure = {
         sneakers: sneakersList,
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
 
       const newSneakersState = sneakersReducer(
@@ -43,6 +47,7 @@ describe("Given a deleteSneakers reducer", () => {
       const initialSneakersState: SneakersStateStructure = {
         sneakers: sneakersList,
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
 
       const newSneakersState = sneakersReducer(
@@ -61,11 +66,13 @@ describe("Given an addSneakers reducer", () => {
       const initialSneakersState: SneakersStateStructure = {
         sneakers: sneakersList,
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
 
       const expectedSneakersState: SneakersStateStructure = {
         sneakers: [...initialSneakersState.sneakers, sneakerToAdd],
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
 
       const newSneakersState = sneakersReducer(
@@ -84,6 +91,7 @@ describe("Given a loadMoreSnakers reducer", () => {
       const initialSneakersState: SneakersStateStructure = {
         sneakers: sneakersList,
         limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
       };
 
       const expectedSneakersState: SneakersStateStructure = {
@@ -94,6 +102,30 @@ describe("Given a loadMoreSnakers reducer", () => {
       const newSneakersState = sneakersReducer(
         initialSneakersState,
         loadMoreSneakersActionCreator()
+      );
+
+      expect(newSneakersState).toStrictEqual(expectedSneakersState);
+    });
+  });
+});
+
+describe("Given a loadSneakerById reducer", () => {
+  describe("When it receives a current state with a list of 5 sneakers and a loadSneakerById action with an id of a sneaker as payload", () => {
+    test("Then it should return the list of 5 sneakers with the new sneaker", () => {
+      const initialSneakersState: SneakersStateStructure = {
+        sneakers: sneakersList,
+        limit: limitSneakers,
+        sneaker: sneakerEmptyMock,
+      };
+
+      const expectedSneakersState: SneakersStateStructure = {
+        ...initialSneakersState,
+        sneaker: sneakerToAdd,
+      };
+
+      const newSneakersState = sneakersReducer(
+        initialSneakersState,
+        loadSneakerByIdActionCreator(sneakerToAdd)
       );
 
       expect(newSneakersState).toStrictEqual(expectedSneakersState);

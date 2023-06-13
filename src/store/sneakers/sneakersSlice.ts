@@ -4,6 +4,20 @@ import { SneakerStructure, SneakersStateStructure } from "./types";
 const initialState: SneakersStateStructure = {
   sneakers: [],
   limit: 5,
+  sneaker: {
+    id: "",
+    name: "",
+    brand: "",
+    image: "",
+    price: 0,
+    colors: [],
+    features: {
+      description: "",
+      description2: "",
+      isAvailable: false,
+    },
+    user: "",
+  },
 };
 
 const sneakersSlice = createSlice({
@@ -37,6 +51,13 @@ const sneakersSlice = createSlice({
       ...currentState,
       limit: currentState.limit + 5,
     }),
+    loadSneakerById: (
+      currentState: SneakersStateStructure,
+      action: PayloadAction<SneakerStructure>
+    ) => ({
+      ...currentState,
+      sneaker: action.payload,
+    }),
   },
 });
 
@@ -45,5 +66,6 @@ export const {
   deleteSneakers: deleteSneakersActionCreator,
   addSneakers: addSneakersActionCreator,
   loadMoreSneakers: loadMoreSneakersActionCreator,
+  loadSneakerById: loadSneakerByIdActionCreator,
 } = sneakersSlice.actions;
 export const sneakersReducer = sneakersSlice.reducer;
