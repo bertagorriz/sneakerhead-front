@@ -14,10 +14,13 @@ const SneakerListPage = (): React.ReactElement => {
   const { getSneakers } = useApi();
   const { sneakers } = useAppSelector((state) => state.sneakersStore);
   const [totalSneakers, setTotalSneakers] = useState(0);
-
-  scrollTo(0, 0);
+  const [loadMore, setLoadMore] = useState(false);
 
   useEffect(() => {
+    if (loadMore === false) {
+      scrollTo(0, 0);
+    }
+
     (async () => {
       const response = await getSneakers();
 
@@ -28,20 +31,23 @@ const SneakerListPage = (): React.ReactElement => {
 
         dispatch(loadSneakersActionCreator(sneakers));
 
-        const preconnectElement = await document.createElement("link");
-        preconnectElement.rel = "preload";
-        preconnectElement.as = "image";
-        preconnectElement.href = sneakers[0].image;
-
         const parent = document.head;
         const firstChild = document.head.firstChild;
 
-        parent.insertBefore(preconnectElement, firstChild);
+        for (let i = 0; i < 3; i++) {
+          const preconnectElement = await document.createElement("link");
+          preconnectElement.rel = "preload";
+          preconnectElement.as = "image";
+          preconnectElement.href = sneakers[i].image;
+
+          parent.insertBefore(preconnectElement, firstChild);
+        }
       }
     })();
-  }, [getSneakers, dispatch]);
+  }, [getSneakers, dispatch, loadMore]);
 
   const handleOnLoadMore = () => {
+    setLoadMore(true);
     dispatch(loadMoreSneakersActionCreator());
   };
 
