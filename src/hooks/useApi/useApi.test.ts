@@ -70,7 +70,7 @@ describe("Given a deleteSneakers function", () => {
   });
 
   describe("When it is invoked with an invalid id", () => {
-    test("Then it should show a modal with a close button", async () => {
+    test("Then it should show a modal with the 'Sneaker couldn't be removed...' message", async () => {
       server.resetHandlers(...errorHandlers);
 
       const expectedMessage = "Sneaker couldn't be removed...";
