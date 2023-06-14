@@ -6,6 +6,12 @@ const SneakersListStyled = styled.ul`
   .sneaker {
     padding-bottom: 24px;
   }
+
+  .no-sneakers {
+    text-transform: uppercase;
+    font-size: ${(props) => props.theme.fontSize.title};
+    font-weight: ${(props) => props.theme.fontWeight.weight600};
+  }
 `;
 
 export default SneakersListStyled;
