@@ -7,6 +7,7 @@ import {
   LazyLoginPage,
   LazyNotFoundPage,
   LazySneakerDetailPageStyled,
+  LazyAddSneakerPage,
 } from "./lazyComponents";
 
 const routes: RouteObject[] = [
@@ -31,6 +32,14 @@ const routes: RouteObject[] = [
         element: (
           <Suspense>
             <LazySneakerListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.addSneaker,
+        element: (
+          <Suspense>
+            <LazyAddSneakerPage />
           </Suspense>
         ),
       },
