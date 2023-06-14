@@ -32,6 +32,8 @@ const SneakerCard = ({
     if (response) {
       const { sneakers } = response;
 
+      await getSneakers();
+
       dispatch(loadSneakersActionCreator(sneakers));
     }
   };
