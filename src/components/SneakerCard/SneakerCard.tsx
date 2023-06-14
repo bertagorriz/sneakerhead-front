@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { useAppDispatch } from "../../store";
 import {
@@ -31,7 +32,6 @@ const SneakerCard = ({
     if (response) {
       const { sneakers } = response;
 
-      await getSneakers();
       dispatch(loadSneakersActionCreator(sneakers));
     }
   };
@@ -39,14 +39,16 @@ const SneakerCard = ({
   return (
     <SneakerCardStyled className="card">
       <div>
-        <img
-          className="card__image"
-          src={image}
-          loading={isLazy}
-          alt={`Model ${name} from ${brand}`}
-          width={272}
-          height={272}
-        />
+        <Link to={`/${id}`}>
+          <img
+            className="card__image"
+            src={image}
+            loading={isLazy}
+            alt={`Model ${name} from ${brand}`}
+            width={272}
+            height={272}
+          />
+        </Link>
       </div>
       <div className="card__text">
         <h2 className="card__text__name">{name}</h2>

@@ -6,6 +6,7 @@ const paths: PathsStructure = {
   home: "/home",
   sneakers: "/sneakers",
   delete: "/delete",
+  details: "/:id",
 };
 
 export default paths;

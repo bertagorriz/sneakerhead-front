@@ -3,10 +3,10 @@ import { Suspense } from "react";
 import App from "../components/App/App";
 import paths from "./paths/paths";
 import {
-  LazyAddSneakerPage,
   LazySneakerListPage,
   LazyLoginPage,
   LazyNotFoundPage,
+  LazySneakerDetailPageStyled,
 } from "./lazyComponents";
 
 const routes: RouteObject[] = [
@@ -35,10 +35,10 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: paths.addSneaker,
+        path: paths.details,
         element: (
           <Suspense>
-            <LazyAddSneakerPage />
+            <LazySneakerDetailPageStyled />
           </Suspense>
         ),
       },

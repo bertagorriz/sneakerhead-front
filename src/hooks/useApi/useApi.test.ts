@@ -129,6 +129,7 @@ describe("Given an addSneakers function", () => {
 
 describe("Given a getSneakersById function", () => {
   const id = "646fb28a61b26ee42aa53976";
+
   describe("When it is invoked with a valid id", () => {
     test("Then it should return the beach with the id", async () => {
       const expectedSneaker = sneakerMockAdded;

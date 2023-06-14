@@ -4,6 +4,7 @@ interface PathsStructure {
   home: string;
   sneakers: string;
   delete: string;
+  details: string;
 }
 
 export default PathsStructure;
