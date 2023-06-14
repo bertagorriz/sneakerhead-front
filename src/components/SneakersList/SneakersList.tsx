@@ -16,6 +16,9 @@ const SneakersList = (): React.ReactElement => {
           />
         </li>
       ))}
+      {sneakers.length === 0 && (
+        <span className="no-sneakers">No sneakers found ...</span>
+      )}
     </SneakersListStyled>
   );
 };
